@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>School Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body class="bg-[#2D5DA1] font-[Arial]">
+
+    <div class="flex">
+
+        <!-- SIDEBAR -->
+        <div class="w-[140px] text-white p-[25px]">
+
+            <div class="w-[60px] h-[60px] rounded-full bg-white mx-auto mb-[40px]"></div>
+
+            <ul class="text-center">
+
+                <li class="flex flex-col items-center my-[60px] cursor-pointer">
+                    <i class="fa fa-home text-[36px] mb-[6px]"></i>
+                    Home
+                </li>
+
+                <li class="flex flex-col items-center my-[60px] cursor-pointer ">
+                    <i class="fa fa-calendar text-[36px] mb-[6px]"></i>
+                    Events
+                </li>
+
+                <li class="flex flex-col items-center my-[60px] cursor-pointer">
+                    <i class="fa fa-medal text-[36px] mb-[6px]"></i>
+                    Honors
+                </li>
+
+                <li class="flex flex-col items-center my-[60px] cursor-pointer">
+                    <i class="fa fa-th-large text-[36px] mb-[6px]"></i>
+                    Overview
+                </li>
+
+                <li class="flex flex-col items-center my-[60px] cursor-pointer">
+                    <i class="fa fa-user text-[36px] mb-[6px]"></i>
+                    Profile
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- MAIN -->
+        <div class="flex-1 p-[25px] bg-[#F7F4ED] rounded-tl-[50px]">
+
+            <!-- HEADER -->
+            <div class="flex items-center mb-[25px] mx-[30px]">
+
+                <div class="bg-[#6489BF] w-[50px] h-[50px] flex items-center justify-center rounded-[10px]">
+                    <i class="fa fa-bell text-white text-[22px]"></i>
+                </div>
+
+                <div class="bg-[#6489BF] px-[15px] py-[10px] rounded-[10px] w-[550px] h-[50px] flex items-center mx-[30px]">
+                    <i class="fa fa-search text-white text-[22px]"></i>
+                    <input class="ml-[10px] bg-transparent outline-none border-none placeholder-white text-white" placeholder="Search...">
+                </div>
+
+                <div class="flex items-center gap-[10px] ml-auto">
+                    <div class="w-[45px] h-[45px] rounded-full bg-gray-300"></div>
+
+                    <div>
+                        <b>Forensya Hani</b><br>
+                        <span class="text-gray-500">Student</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="flex gap-[30px] mx-[30px]">
+
+                <!-- LEFT -->
+                <div class="flex-[7]">
+
+                    <!-- RECENT EVENT -->
+                    <div class="relative rounded-[35px] overflow-hidden mb-[20px] w-[630px] h-[400px]">
+
+                        <div class="w-full h-full bg-[#cfd6ea]"></div>
+
+                        <div class="absolute bottom-0 left-0 right-0 bg-[#2D5DA1] text-white p-[30px] rounded-[35px]">
+                            <h2 class="text-[20px] font-bold">Recent Events</h2>
+                            <p class="text-[18px]">IBADAH NATAL 2025</p>
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="my-[20px]">UPCOMING EVENTS</h3>
+
+                    <div class="flex gap-[15px] items-center">
+
+                        <div class="w-[180px] h-[260px] bg-[#2D5DA1] text-white rounded-t-[10px] rounded-b-[20px] text-center">
+
+                            <div class="h-[170px] bg-[#cfd6ea] rounded-t-[9px] mb-[12px]"></div>
+
+                            <p class="text-[22px] font-bold">Imma Fest</p>
+                            <span class="text-[14px] text-gray-300">10 Februari 2026</span>
+
+                        </div>
+
+                        <div class="w-[180px] h-[260px] bg-[#2D5DA1] text-white rounded-t-[10px] rounded-b-[20px] text-center">
+
+                            <div class="h-[170px] bg-[#cfd6ea] rounded-t-[9px] mb-[12px]"></div>
+
+                            <p class="text-[22px] font-bold">Imma Fest</p>
+                            <span class="text-[14px] text-gray-300">10 Februari 2026</span>
+
+                        </div>
+
+                        <div class="w-[180px] h-[260px] bg-[#2D5DA1] text-white rounded-t-[10px] rounded-b-[20px] text-center">
+
+                            <div class="h-[170px] bg-[#cfd6ea] rounded-t-[9px] mb-[12px]"></div>
+
+                            <p class="text-[22px] font-bold">Imma Fest</p>
+                            <span class="text-[14px] text-gray-300">10 Februari 2026</span>
+
+                        </div>
+
+                        <div class="flex text-[22px] text-white border-2 rounded-full bg-[#6489BF] p-[10px] justify-center">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="my-[20px]">EVENT GALLERY</h3>
+
+                    <div class="h-[220px] bg-[#cfd6ea] rounded-[10px] flex items-center justify-center">
+
+                        <div class="text-center text-white p-[20px]">
+
+                            <h2 class="text-[22px] font-bold">UNLOCK OUR GALLERY</h2>
+
+                            <div class="text-[25px] my-[10px]">
+                                <i class="fa fa-lock"></i>
+                            </div>
+
+                            <button class="mt-[10px] px-[15px] py-[8px] bg-white rounded-[6px] font-bold text-blue-500">
+                                Unlock Now
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT -->
+                <div>
+
+                    <h3 class="mb-[20px]">RECENT CHAMPIONS</h3>
+
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
+                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                        <div>
+                            <p>Prestasi Membanggakan : Juara 3 Lomba Band Symphoria</p>
+                            <span class="text-gray-500">1 March 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
+                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                        <div>
+                            <p>Best Coordinator Supporter Honda DBL</p>
+                            <span class="text-gray-500">5 Mar 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
+                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                        <div>
+                            <p>Juara Harapan 1 Lomba Wushu</p>
+                            <span class="text-gray-500">5 Mar 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
+                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                        <div>
+                            <p>Juara 3 Duta Pelajar Remaja Kalimantan Barat</p>
+                            <span class="text-gray-500">20 Jan 2026</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <footer class="text-center mt-[30px] text-gray-500">
+                © 2026 SMK Kristen Immanuel Pontianak
+            </footer>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

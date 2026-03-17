@@ -3,8 +3,10 @@ namespace App\Controllers;
 
 class HomeController
 {
-    public function HompageView()
+    public function homeView()
     {
-        require_once '../app/views/Homepage.php';
+        require_once '../app/views/home.php';
     }
+
 }
+?>
