@@ -67,12 +67,13 @@
                 </div>
 
                 <div class="flex items-center gap-[10px] ml-auto">
-                    <div class="w-[45px] h-[45px] rounded-full bg-gray-300"></div>
+                    
 
-                    <div>
-                        <b>Forensya Hani</b><br>
-                        <span class="text-gray-500">Student</span>
+                    <div class="mr-[10px]">
+                        <b class="text-[20px]">Forensya Hani</b><br>
+                        <span class="text-[#2D5DA1] font-bold">Student</span>
                     </div>
+                    <div class="w-[75px] h-[75px] rounded-full  bg-gray-300"></div>
                 </div>
 
             </div>
@@ -160,37 +161,37 @@
                 <!-- RIGHT -->
                 <div>
 
-                    <h3 class="mb-[20px]">RECENT CHAMPIONS</h3>
+                    <h3 class="mb-[16px] text-[22px] font-bold flex justify-center">PRESTASI TERBARU</h3>
 
-                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
-                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[10px]">
+                        <div class="w-[210px] h-[145px] bg-[#cfd6ea] rounded-[8px] shrink-0"></div>
                         <div>
-                            <p>Prestasi Membanggakan : Juara 3 Lomba Band Symphoria</p>
-                            <span class="text-gray-500">1 March 2026</span>
+                            <p class="mt-[5px] ml-[10px] text-[22px] font-bold text-[#2D5DA1]">Prestasi Membanggakan : Juara 3 Lomba Band Symphoria</p>
+                            <span class="text-gray-500 font-bold"><i class="fa fa-calendar text-[#2D5DA1] mt-[5px] ml-[10px] mr-[5px]"></i>1 March 2026</span>
                         </div>
                     </div>
 
-                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
-                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[10px]">
+                        <div class="w-[210px] h-[145px] bg-[#cfd6ea] rounded-[8px] shrink-0"></div>
                         <div>
-                            <p>Best Coordinator Supporter Honda DBL</p>
-                            <span class="text-gray-500">5 Mar 2026</span>
+                            <p class="mt-[5px] ml-[10px] text-[22px] font-bold text-[#2D5DA1]">Best Coordinator Supporter Honda DBL</p>
+                            <span class="text-gray-500 font-bold"><i class="fa fa-calendar text-[#2D5DA1] mt-[5px] ml-[10px] mr-[5px]"></i>5 Mar 2026</span>
                         </div>
                     </div>
 
-                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
-                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[10px]">
+                        <div class="w-[210px] h-[145px] bg-[#cfd6ea] rounded-[8px] shrink-0"></div>
                         <div>
-                            <p>Juara Harapan 1 Lomba Wushu</p>
-                            <span class="text-gray-500">5 Mar 2026</span>
+                            <p class="mt-[5px] ml-[10px] text-[22px] font-bold text-[#2D5DA1]">Juara Harapan 1 Lomba Wushu</p>
+                            <span class="text-gray-500 font-bold"><i class="fa fa-calendar text-[#2D5DA1] mt-[5px] ml-[10px] mr-[5px]"></i>5 Mar 2026</span>
                         </div>
                     </div>
 
-                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[15px]">
-                        <div class="w-[240px] h-[145px] bg-[#cfd6ea] rounded-[8px]"></div>
+                    <div class="flex gap-[10px] p-[10px] rounded-[10px] mb-[10px]">
+                        <div class="w-[210px] h-[145px] bg-[#cfd6ea] rounded-[8px] shrink-0"></div>
                         <div>
-                            <p>Juara 3 Duta Pelajar Remaja Kalimantan Barat</p>
-                            <span class="text-gray-500">20 Jan 2026</span>
+                            <p class="mt-[5px] ml-[10px] text-[22px] font-bold text-[#2D5DA1]">Juara 3 Duta Pelajar Remaja Kalimantan Barat</p>
+                            <span class="text-gray-500 font-bold"><i class="fa fa-calendar text-[#2D5DA1] mt-[5px] ml-[10px] mr-[5px]"></i>20 Jan 2026</span>
                         </div>
                     </div>
 
