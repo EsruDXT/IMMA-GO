@@ -13,7 +13,11 @@ $router->add('GET', '/login', 'AuthController', 'loginView');
 // Register Page
 $router->add('GET', '/register', 'AuthController', 'registerView');
 
+// Home Page
 $router->add('GET', '/home', 'HomeController', 'homeView');
+
+// Events Page
+$router->add('GET', '/events', 'EventsController', 'eventsView');
 // Manage Product
 // Daftar Produk
 $router->add('GET', '/products', 'ProductController', 'index');
