@@ -19,6 +19,7 @@ $router->add('GET', '/home', 'HomeController', 'homeView');
 // Events Page
 $router->add('GET', '/events', 'EventsController', 'eventsView');
 // Manage Product
+
 // Daftar Produk
 $router->add('GET', '/products', 'ProductController', 'index');
 
@@ -30,6 +31,10 @@ $router->add('GET', '/products/{id}/edit', 'ProductController', 'edit');
 
 // Detail
 $router->add('GET', '/products/{id}', 'ProductController', 'show');
+
+//Event Detail
+$router->add('GET', '/event-detail', 'EventController', 'detail');
+
 
 
 
