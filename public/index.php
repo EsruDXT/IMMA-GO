@@ -37,6 +37,8 @@ $router->add('GET', '/products/{id}', 'ProductController', 'show');
 //Event Detail
 $router->add('GET', '/event-detail', 'EventController', 'detail');
 
+// Profile Page
+$router->add('GET', '/profile', 'ProfileController', 'profileView');
 
 
 
