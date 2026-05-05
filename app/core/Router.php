@@ -14,10 +14,12 @@ class Router
             'function' => $function,
         ];
     }
-
-    public function run() 
+    public function run()   
     {
         $method = $_SERVER['REQUEST_METHOD'];
+        if ($method === 'POST' && isset($_POST['_method'])) {
+            $method = strtoupper($_POST['_method']);
+        }
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         foreach ($this->routes as $route) {
@@ -28,8 +30,9 @@ class Router
             );
             $pattern = '#^' . $pattern . '$#';
 
-            if (preg_match($pattern, $uri, $matches)) {
+            if (preg_match($pattern, $uri, $matches) && $method === $route['method']) {
                 array_shift($matches);
+
 
                 require_once '../app/controllers/' . $route['controller'] . '.php';
 
@@ -42,8 +45,9 @@ class Router
             }
         }
 
-        http_response_code(404);
-        echo "<h1>404 - Page Not Found</h1>";
+
+    
+    http_response_code(404);
+    echo "<h1>404 - Page Not Found</h1>";
     }
 }
-

@@ -26,3 +26,17 @@ const slides = document.getElementById("slides");
 
     updateSlide();
     setInterval(autoSlide, 3000);
+
+    function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+    menu.classList.toggle("hidden");
+}
+
+// klik luar nutup dropdown
+window.addEventListener("click", function(e) {
+    const dropdown = document.getElementById("dropdownMenu");
+
+    if (!e.target.closest(".relative")) {
+        dropdown.classList.add("hidden");
+    }
+});

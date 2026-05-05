@@ -1,6 +1,6 @@
-<footer width="100%" class="bg-[#F7F4ED] p-[20px] text-center">
+<footer width="100%" class="p-[20px] text-center">
 
-        <p class="text-[18px]">
+        <p class="text-[14px]">
             © 2026 SMK Kristen Immanuel Pontianak
         </p>
 
