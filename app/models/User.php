@@ -14,11 +14,13 @@ class User extends Database
     public function getUsers()
     {
         $users = [];
+
         $query = "SELECT * FROM {$this->table}";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
 
         $result = $stmt->get_result();
+
         while ($user = $result->fetch_assoc()) {
             $users[] = $user;
         }
@@ -30,6 +32,7 @@ class User extends Database
     public function getUserById(int $id)
     {
         $query = "SELECT * FROM {$this->table} WHERE id = ?";
+
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -40,12 +43,18 @@ class User extends Database
     // REGISTER
     public function insert(array $data)
     {
-        $name = htmlspecialchars($data['name']);
+        $name = htmlspecialchars(trim($data['name']));
         $email = strtolower(trim($data['email']));
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
+        // DEFAULT ROLE
+        $role = $data['role'] ?? 'student';
+
         // CEK EMAIL DUPLIKAT
-        $check = $this->connection->prepare("SELECT id FROM {$this->table} WHERE email = ?");
+        $check = $this->connection->prepare(
+            "SELECT id FROM {$this->table} WHERE email = ?"
+        );
+
         $check->bind_param("s", $email);
         $check->execute();
 
@@ -53,10 +62,20 @@ class User extends Database
             return false;
         }
 
-        // INSERT
-        $query = "INSERT INTO {$this->table} (name, email, password) VALUES (?, ?, ?)";
+        // INSERT USER
+        $query = "INSERT INTO {$this->table}
+                  (name, email, password, role)
+                  VALUES (?, ?, ?, ?)";
+
         $stmt = $this->connection->prepare($query);
-        $stmt->bind_param("sss", $name, $email, $password);
+
+        $stmt->bind_param(
+            "ssss",
+            $name,
+            $email,
+            $password,
+            $role
+        );
 
         return $stmt->execute();
     }
@@ -66,56 +85,104 @@ class User extends Database
     {
         $email = strtolower(trim($email));
 
-        $query = "SELECT id, name, email, password FROM {$this->table} WHERE email = ?";
+        $query = "SELECT
+                    id,
+                    name,
+                    email,
+                    password,
+                    role
+                  FROM {$this->table}
+                  WHERE email = ?";
+
         $stmt = $this->connection->prepare($query);
+
         $stmt->bind_param("s", $email);
         $stmt->execute();
 
         $user = $stmt->get_result()->fetch_assoc();
 
+        // USER TIDAK ADA
         if (!$user) {
             return false;
         }
 
+        // PASSWORD BENAR
         if (password_verify($password, $user['password'])) {
-            session_regenerate_id(true);
             return $user;
         }
 
         return false;
     }
 
-    // UPDATE
+    // UPDATE USER
     public function update(array $data, int $id)
     {
-        $name = htmlspecialchars($data['name']);
-        $email = htmlspecialchars($data['email']);
+        $name = htmlspecialchars(trim($data['name']));
+        $email = strtolower(trim($data['email']));
+        $role = $data['role'];
 
-        // kalau password diisi → hash
+        // UPDATE DENGAN PASSWORD BARU
         if (!empty($data['password'])) {
-            $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            $query = "UPDATE {$this->table} SET name = ?, email = ?, password = ? WHERE id = ?";
+            $password = password_hash(
+                $data['password'],
+                PASSWORD_DEFAULT
+            );
+
+            $query = "UPDATE {$this->table}
+                      SET
+                        name = ?,
+                        email = ?,
+                        password = ?,
+                        role = ?
+                      WHERE id = ?";
+
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssi", $name, $email, $password, $id);
+
+            $stmt->bind_param(
+                "ssssi",
+                $name,
+                $email,
+                $password,
+                $role,
+                $id
+            );
+
         } else {
-            // kalau password kosong → jangan update password
-            $query = "UPDATE {$this->table} SET name = ?, email = ? WHERE id = ?";
+
+            // UPDATE TANPA GANTI PASSWORD
+            $query = "UPDATE {$this->table}
+                      SET
+                        name = ?,
+                        email = ?,
+                        role = ?
+                      WHERE id = ?";
+
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssi", $name, $email, $id);
+
+            $stmt->bind_param(
+                "sssi",
+                $name,
+                $email,
+                $role,
+                $id
+            );
         }
 
         return $stmt->execute();
     }
 
-    // DELETE
+    // DELETE USER
     public function delete(int $id)
     {
         $query = "DELETE FROM {$this->table} WHERE id = ?";
+
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param("i", $id);
 
         $stmt->execute();
+
         return $stmt->affected_rows > 0;
     }
 }
+?>

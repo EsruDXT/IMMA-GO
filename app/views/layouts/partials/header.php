@@ -29,7 +29,7 @@ $user = $_SESSION['user'] ?? null;
                             <b class="text-[20px] text-gray-800">
                                 <?= htmlspecialchars($_SESSION['user']['name']); ?>
                             </b><br>
-                            <span class="text-[#2D5DA1] font-bold">Student</span>
+                            <span class="text-[#2D5DA1] font-bold"><?= strtoupper(htmlspecialchars($_SESSION['user']['role'])); ?></span>
                         </div>
 
                         <img src="/assets/images/profile.png"

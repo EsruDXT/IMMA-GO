@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// SUCCESS dari register
+// SUKSES register
 if (isset($_SESSION['success'])) {
     echo "<div class='bg-green-100 text-green-700 p-2 mb-3 rounded'>
             {$_SESSION['success']}
@@ -105,10 +105,6 @@ if (isset($_SESSION['error'])) {
 
                     <!-- OPTIONS -->
                     <div class="flex items-center justify-between text-[14px]">
-                        <label class="flex items-center gap-[6px] text-gray-600">
-                            <input type="checkbox">
-                            Keep me logged in
-                        </label>
 
                         <a href="#" class="text-gray-500 hover:underline">
                             Forgot password?
@@ -122,7 +118,6 @@ if (isset($_SESSION['error'])) {
 
                 </form>
 
-                <!-- DIVIDER -->
                 <div class="flex items-center gap-[10px] my-[20px]">
                     <div class="flex-1 h-[1px] bg-gray-300"></div>
                     <span class="text-gray-400 text-[14px]">OR</span>
