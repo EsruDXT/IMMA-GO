@@ -105,10 +105,6 @@ if (isset($_SESSION['error'])) {
 
                     <!-- OPTIONS -->
                     <div class="flex items-center justify-between text-[14px]">
-
-                        <a href="#" class="text-gray-500 hover:underline">
-                            Forgot password?
-                        </a>
                     </div>
 
                     <!-- BUTTON -->
@@ -120,17 +116,8 @@ if (isset($_SESSION['error'])) {
 
                 <div class="flex items-center gap-[10px] my-[20px]">
                     <div class="flex-1 h-[1px] bg-gray-300"></div>
-                    <span class="text-gray-400 text-[14px]">OR</span>
                     <div class="flex-1 h-[1px] bg-gray-300"></div>
                 </div>
-
-                <!-- REGISTER -->
-                <p class="text-[14px] text-gray-600 text-center">
-                    New here?
-                    <a href="/register" class="font-semibold text-black hover:underline">
-                        Create an account!
-                    </a>
-                </p>
 
                 <?php require_once '../app/views/layouts/partials/footer.php'; ?>
 

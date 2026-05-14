@@ -24,7 +24,7 @@ private function redirectIfLoggedIn()
 
     $role = $_SESSION['user']['role'];
 
-    if ($role === 'moderator') {
+    if ($role === 'admin') {
 
         header("Location: /admin");
     } 
@@ -104,60 +104,49 @@ private function redirectIfLoggedIn()
     //     exit;
     // }
 
-    // ===== LOGIN =====
-    public function login()
-    {
-        $this->startSession();
+// ===== LOGIN =====
+public function login()
+{
+    $this->startSession();
 
-        $email = strtolower(trim($_POST['email'] ?? ''));
-        $password = $_POST['password'] ?? '';
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    $password = $_POST['password'] ?? '';
 
-        if (empty($email) || empty($password)) {
-            $_SESSION['error'] = "Email dan password wajib diisi!";
-            header("Location: /login");
-            exit;
-        }
+    // VALIDASI
+    if (empty($email) || empty($password)) {
 
-        $userModel = new User();
-        $user = $userModel->login($email, $password);
-
-        if ($user) {
-
-            session_regenerate_id(true);
-
-            $_SESSION['user'] = [
-                'id' => $user['id'],
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'role' => $user['role']
-            ];
-
-            $_SESSION['success'] = "Login berhasil!";
-
-            // REDIRECT BERDASARKAN ROLE
-            if ($user['role'] === 'teacher') {
-
-                header("Location: /teacher");
-            } elseif ($user['role'] === 'moderator') {
-
-                header("Location: /admin");
-            } elseif ($user['role'] === 'developer') {
-
-                header("Location: /developer");
-            } else {
-
-                // DEFAULT = STUDENT
-                header("Location: /home");
-            }
-        } else {
-
-            $_SESSION['error'] = "Email atau password salah!";
-            header("Location: /login");
-        }
-
+        $_SESSION['error'] = "Email dan password wajib diisi!";
+        header("Location: /login");
         exit;
     }
 
+    $userModel = new User();
+    $user = $userModel->login($email, $password);
+
+    // LOGIN BERHASIL
+    if ($user) {
+
+        session_regenerate_id(true);
+
+        $_SESSION['user'] = [
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'role' => $user['role']
+        ];
+
+        $_SESSION['success'] = "Login berhasil!";
+
+        // SEMUA ROLE MASUK KE HOME
+        header("Location: /home");
+        exit;
+    }
+
+    // LOGIN GAGAL
+    $_SESSION['error'] = "Email atau password salah!";
+    header("Location: /login");
+    exit;
+}
     public function logout()
     {
         session_start();

@@ -23,7 +23,7 @@ $user = $_SESSION['user'] ?? null;
                 <div class="relative ml-auto">
 
                     <!-- TRIGGER -->
-                    <div onclick="toggleDropdown()" class="cursor-pointer flex items-center gap-[10px]">
+                    <div onclick="window.location.href='/profile'" class="cursor-pointer flex items-center gap-[10px]">
 
                         <div class="mr-[10px] text-right">
                             <b class="text-[20px] text-gray-800">
@@ -37,26 +37,6 @@ $user = $_SESSION['user'] ?? null;
 
                     </div>
 
-                    <!-- DROPDOWN -->
-                    <div id="dropdownMenu"
-                        class="hidden absolute right-0 mt-[10px] w-[180px] bg-white rounded-[10px] shadow-lg overflow-hidden z-50">
-
-                        <a href="/profile" class="block px-[15px] py-[10px] hover:bg-gray-100">
-                            👤 Profile
-                        </a>
-
-                        <a href="/settings" class="block px-[15px] py-[10px] hover:bg-gray-100">
-                            ⚙️ Settings
-                        </a>
-
-                        <div class="border-t"></div>
-
-                        <a href="/logout"
-                            class="block px-[15px] py-[10px] text-red-500 hover:bg-red-50">
-                            🚪 Logout
-                        </a>
-
-                    </div>
 
                 </div>
 
