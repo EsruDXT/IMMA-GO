@@ -40,8 +40,7 @@ $router->add('GET', '/event-detail', 'EventController', 'detail');
 // Profile Page
 $router->add('GET', '/profile', 'ProfileController', 'profileView');
 
-
-
-
+// Add Event Page
+$router->add('GET', '/events/create', 'AddEventController', 'addEventView');
 
 $router->run();
