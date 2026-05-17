@@ -18,21 +18,10 @@ class AuthController
 
 private function redirectIfLoggedIn()
 {
-    if (!isset($_SESSION['user'])) {
-        return;
-    }
-
-    $role = $_SESSION['user']['role'];
-
-    if ($role === 'admin') {
-
-        header("Location: /admin");
-    } 
-     else {
+    if (isset($_SESSION['user'])) {
         header("Location: /home");
+        exit;
     }
-
-    exit;
 }
 
     // ===== VIEW =====

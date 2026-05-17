@@ -1,10 +1,6 @@
 <?php
 session_start();
 ?>
-<!-- Cek User Session Bisa atau ndak -->
-<pre>
-<?php print_r($_SESSION['user']); ?>
-</pre>
 <!DOCTYPE html>
 <html lang="en">
 
