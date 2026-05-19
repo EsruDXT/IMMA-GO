@@ -9,57 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<!-- SIDEBAR -->
+
 <body class="bg-[#2D5DA1] font-[Arial] overflow-hidden m-0">
 
     <div class="flex h-screen w-full">
-
-        <aside class="w-[140px] text-white p-[25px] flex-shrink-0 flex flex-col items-center">
-            <img src="/assets/images/SKI.png" alt="Logo" class="w-[67px] h-[76px] mb-[40px]">
-            <ul class="text-center w-full">
-                <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/'">
-                    <i class="fa fa-home text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-                    <span class="text-sm mb-[25px]">Home</span>
-                </li>
-                <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/events'">
-                    <i class="fa fa-calendar text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-                    <span class="text-sm mb-[25px]">Events</span>
-                </li>
-                <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/'">
-                    <i class="fa fa-medal text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-                    <span class="text-sm mb-[25px]">Honors</span>
-                </li>
-                <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/'">
-                    <i class="fa fa-th-large text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-                    <span class="text-sm mb-[25px]">Overview</span>
-                </li>
-                <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/'">
-                    <i class="fa fa-user text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-                    <span class="text-sm mb-[25px]">Profile</span>
-                </li>
-            </ul>
-        </aside>
+<!-- SIDEBAR -->
+       <?php require_once '../app/views/layouts/partials/sidebar.php'; ?>
 <!-- HEADER -->
-        <div class="flex-1 bg-[#F7F4ED] rounded-tl-[50px] flex flex-col overflow-hidden">
-
-            <div class="flex items-center p-[30px] flex-shrink-0">
-                <div class="bg-[#6489BF] w-[50px] h-[50px] flex items-center justify-center rounded-[10px] cursor-pointer hover:bg-[#4E73A5] transition">
-                    <i class="fa fa-bell text-white text-[22px]"></i>
-                </div>
-
-                <div class="bg-[#6489BF] px-[15px] py-[10px] rounded-[10px] w-[550px] h-[50px] flex items-center mx-[30px]">
-                    <i class="fa fa-search text-white text-[22px]"></i>
-                    <input class="ml-[10px] bg-transparent outline-none border-none placeholder-white text-white w-full" placeholder="Search...">
-                </div>
-
-                <div class="flex items-center gap-[10px] ml-auto">
-                    <div class="mr-[10px] text-right">
-                        <b class="text-[20px] text-gray-800">Forensya Hani</b><br>
-                        <span class="text-[#2D5DA1] font-bold">Student</span>
-                    </div>
-                    <img src="/assets/images/profile.png" alt="Profile" class="w-[75px] h-[75px] rounded-full bg-gray-300 object-cover">
-                </div>
-            </div>
+        <?php require_once '../app/views/layouts/partials/header.php'; ?>
 <!-- MAIN CONTENT -->
             <main class="flex-1 overflow-y-auto px-[30px] pb-[30px]">
                 <div class="flex gap-[30px]">

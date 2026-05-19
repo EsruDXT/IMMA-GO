@@ -7,12 +7,14 @@ $router = new Router();
 
 // Register Route
 
-// Login Page
+//login 
 $router->add('GET', '/login', 'AuthController', 'loginView');
-
-// Register Page
+$router->add('POST', '/login', 'AuthController', 'login');
+//register
 $router->add('GET', '/register', 'AuthController', 'registerView');
-
+$router->add('POST', '/register', 'AuthController', 'register');
+//logout
+$router->add('GET', '/logout', 'AuthController', 'logout');
 // Home Page
 $router->add('GET', '/home', 'HomeController', 'homeView');
 
@@ -20,27 +22,12 @@ $router->add('GET', '/home', 'HomeController', 'homeView');
 $router->add('GET', '/events', 'EventsController', 'eventsView');
 
 $router->add('GET', '/event/{id}', 'EventsController', 'detail');
-// Manage Product
 
-// Daftar Produk
-$router->add('GET', '/products', 'ProductController', 'index');
-
-// Tambah
-$router->add('GET', '/products/create', 'ProductController', 'create');
-
-// Edit
-$router->add('GET', '/products/{id}/edit', 'ProductController', 'edit');
-
-// Detail
-$router->add('GET', '/products/{id}', 'ProductController', 'show');
-
-//Event Detail
 $router->add('GET', '/event-detail', 'EventController', 'detail');
+
+$router->add('GET', '/events/create', 'AddEventController', 'addEventView');
 
 // Profile Page
 $router->add('GET', '/profile', 'ProfileController', 'profileView');
-
-// Add Event Page
-$router->add('GET', '/events/create', 'AddEventController', 'addEventView');
 
 $router->run();
