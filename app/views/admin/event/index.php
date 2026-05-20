@@ -67,209 +67,134 @@
                             </button>
                         </div>
                     </div>
-                    <!-- EVENT CARDS -->
-                    <div class="flex flex-col gap-[20px]">
-                        <!-- EVENT CARD 1 -->
-                        <div class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
-                            data-date="2026-08-14" data-category="event" data-class="all" data-req="free">
-                            <div class="w-[30%] relative">
-                                <img src="/assets/images/independence_day.jpeg" alt="Independence Day" class="h-full w-full object-cover">
-                                <div class="absolute bottom-[15px] w-full flex justify-center">
-                                    <button onclick="window.location.href='/event/1'" class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="w-[70%] p-[25px] flex flex-col justify-center">
-                                <h2 class="text-[20px] font-bold mb-[8px]">80th Indonesian Independence Day</h2>
-                                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed">Celebrate the spirit of independence through exciting games, creative performances, and fun activities that bring everyone together.</p>
-                                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-calendar-alt"></i></div>
-                                        <span>Friday August 14, 2026</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-user"></i></div>
-                                        <span>Vincent Genesius</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-map-marker-alt"></i></div>
-                                        <span>Lapangan SMKK Immanuel</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-th-large"></i></div>
-                                        <span>All Class</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Container / DIV buat Tombol -->
-                            <div class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
+<!-- EVENT CARDS -->
+<div class="flex flex-col gap-[20px]">
 
-                                <!-- Tombol Edit -->
-                                <button
-                                    onclick="window.location.href='/admin/events/edit/1'"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-pen"></i>
-                                </button>
+    
+    <?php $events = $events ?? []; foreach ($events as $event): ?>
 
-                                <!-- Tombol Delete -->
-                                <button
-                                    onclick="deleteEvent(1)"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+        <div
+            class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
+            data-date="<?= $event['event_date'] ?>"
+            data-category="<?= $event['category'] ?>"
+            data-class="<?= $event['class_target'] ?>"
+            data-req="<?= $event['requirement'] ?>">
 
-                            </div>
+            <!-- IMAGE -->
+            <div class="w-[30%] relative">
+
+                <img
+                    src="/uploads/<?= $event['image'] ?>"
+                    alt="<?= $event['title'] ?>"
+                    class="h-full w-full object-cover">
+
+                <div class="absolute bottom-[15px] w-full flex justify-center">
+
+                    <button
+                        onclick="window.location.href='/event/<?= $event['id'] ?>'"
+                        class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="w-[70%] p-[25px] flex flex-col justify-center">
+
+                <h2 class="text-[20px] font-bold mb-[8px]">
+                    <?= $event['title'] ?>
+                </h2>
+
+                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed line-clamp-3">
+                    <?= $event['description'] ?>
+                </p>
+
+                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
+
+                    <!-- DATE -->
+                    <div class="flex items-center gap-[12px]">
+
+                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-calendar-alt"></i>
                         </div>
-                        <!-- EVENT CARD 2 -->
-                        <div class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
-                            data-date="2026-08-14" data-category="event" data-class="all" data-req="free">
-                            <div class="w-[30%] relative">
-                                <img src="/assets/images/statistic_competition.jpeg" alt="Statistic Competition" class="h-full w-full object-cover">
-                                <div class="absolute bottom-[15px] w-full flex justify-center">
-                                    <button class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="w-[70%] p-[25px] flex flex-col justify-center">
-                                <h2 class="text-[20px] font-bold mb-[8px]">Statistic Competition 2026</h2>
-                                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed">Challenge your analytical and problem-solving skills in this engaging statistics competition. Compete with others and showcase your abilities.</p>
-                                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-calendar-alt"></i></div>
-                                        <span>Tuesday, August 11, 2026</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-user"></i></div>
-                                        <span>Sondang S.</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-map-marker-alt"></i></div>
-                                        <span>Universitas Tanjungpura Pontianak</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-th-large"></i></div>
-                                        <span>All Class</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Container / DIV buat Tombol -->
-                            <div class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
 
-                                <!-- Tombol Edit -->
-                                <button
-                                    onclick="window.location.href='/admin/events/edit/1'"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-pen"></i>
-                                </button>
+                        <span>
+                            <?= date('l, d F Y', strtotime($event['event_date'])) ?>
+                        </span>
 
-                                <!-- Tombol Delete -->
-                                <button
-                                    onclick="deleteEvent(1)"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                    </div>
 
-                            </div>
+                    <!-- ORGANIZER -->
+                    <div class="flex items-center gap-[12px]">
+
+                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-user"></i>
                         </div>
-                        <!-- EVENT CARD 3 -->
-                        <div class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
-                            data-date="2026-08-10" data-category="workshop" data-class="all" data-req="free">
-                            <div class="w-[30%] relative">
-                                <img src="/assets/images/CordonWorkshop.jpeg" alt="Info Session" class="h-full w-full object-cover">
-                                <div class="absolute bottom-[15px] w-full flex justify-center">
-                                    <button class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="w-[70%] p-[25px] flex flex-col justify-center">
-                                <h2 class="text-[20px] font-bold mb-[8px]">Info Session & Mini Workshop</h2>
-                                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed">Join this informative session and hands-on mini workshop to explore the world of professional culinary arts.</p>
-                                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-calendar-alt"></i></div>
-                                        <span>Monday, August 10, 2026</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-user"></i></div>
-                                        <span>Rieky Martin</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-map-marker-alt"></i></div>
-                                        <span>Aula Tiranus II</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-th-large"></i></div>
-                                        <span>All Class</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Container / DIV buat Tombol -->
-                            <div class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
 
-                                <!-- Tombol Edit -->
-                                <button
-                                    onclick="window.location.href='/admin/events/edit/1'"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-pen"></i>
-                                </button>
+                        <span>
+                            <?= $event['organizer'] ?>
+                        </span>
 
-                                <!-- Tombol Delete -->
-                                <button
-                                    onclick="deleteEvent(1)"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                    </div>
 
-                            </div>
+                    <!-- LOCATION -->
+                    <div class="flex items-center gap-[12px]">
+
+                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-map-marker-alt"></i>
                         </div>
-                        <!-- EVENT CARD 4 -->
-                        <div class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
-                            data-date="2026-09-01" data-category="competition" data-class="all" data-req="paid">
-                            <div class="w-[30%] relative">
-                                <img src="/assets/images/MathComp.jpeg" alt="Info Session" class="h-full w-full object-cover">
-                                <div class="absolute bottom-[15px] w-full flex justify-center">
-                                    <button class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="w-[70%] p-[25px] flex flex-col justify-center">
-                                <h2 class="text-[20px] font-bold mb-[8px]">KOMET (Math Competition)</h2>
-                                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed">Love math? Then KOMET 2026 is your stage. Compete, challenge yourself, and show everyone what you’ve got!</p>
-                                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-calendar-alt"></i></div>
-                                        <span>Monday, September 1, 2026</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-user"></i></div>
-                                        <span>Iis Krisdiyanti</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-map-marker-alt"></i></div>
-                                        <span>Universitas Tanjungpura Pontianak</span>
-                                    </div>
-                                    <div class="flex items-center gap-[12px]">
-                                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0"><i class="fa fa-th-large"></i></div>
-                                        <span>All Class</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Container / DIV buat Tombol -->
-                            <div class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
 
-                                <!-- Tombol Edit -->
-                                <button
-                                    onclick="window.location.href='/admin/events/edit/1'"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-pen"></i>
-                                </button>
+                        <span>
+                            <?= $event['location'] ?>
+                        </span>
 
-                                <!-- Tombol Delete -->
-                                <button
-                                    onclick="deleteEvent(1)"
-                                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                    </div>
 
-                            </div>
+                    <!-- CLASS -->
+                    <div class="flex items-center gap-[12px]">
+
+                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-th-large"></i>
                         </div>
-                        
+
+                        <span>
+                            <?= strtoupper($event['class_target']) ?>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACTION BUTTON -->
+            <div
+                class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
+
+                <!-- EDIT -->
+                <button
+                    onclick="window.location.href='/admin/events/edit/<?= $event['id'] ?>'"
+                    class="text-white text-[22px] hover:scale-125 transition duration-200">
+
+                    <i class="fa fa-pen"></i>
+
+                </button>
+
+                <!-- DELETE -->
+                <button
+                    onclick="deleteEvent(<?= $event['id'] ?>)"
+                    class="text-white text-[22px] hover:scale-125 transition duration-200">
+
+                    <i class="fa fa-trash"></i>
+
+                </button>
+
+            </div>
+        </div>
+
+    <?php endforeach; ?>
                     </div>
                     
                 </div>
