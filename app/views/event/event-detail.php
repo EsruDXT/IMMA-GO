@@ -1,120 +1,246 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>80th Indonesian Independence Day</title>
+    <title><?= htmlspecialchars($event['title']) ?></title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body class="bg-[#2D5DA1] font-[Arial] overflow-hidden m-0">
 
-    <div class="flex h-screen w-full">
+<div class="flex h-screen w-full">
 
-    <!-- SIDEBAR -->
-        <?php require_once '../app/views/layouts/partials/sidebar.php'; ?>
-<!-- MAIN CONTENT -->
-        <main class="flex-1 p-[25px] bg-[#F7F4ED] rounded-tl-[50px] h-full overflow-y-auto">
+    <?php require_once '../app/views/layouts/partials/sidebar.php'; ?>
 
-            <div class="bg-[#F5F4EF] rounded-[40px] p-10 md:p-[50px_60px] w-full max-w-[1400px] shadow-sm font-sans text-gray-800 mx-auto">
+    <main class="flex-1 p-[25px] bg-[#F7F4ED] rounded-tl-[50px] h-full overflow-y-auto">
 
-                <h1 class="text-2xl md:text-[32px] font-extrabold text-[#111] uppercase mb-10 tracking-wide">
-                    PERAYAAN HARI KEMERDEKAAN INDONESIA KE-80
-                </h1>
+        <div class="bg-[#F5F4EF] rounded-[40px] p-10 md:p-[50px_60px] w-full max-w-[1400px] shadow-sm mx-auto">
 
-                <div class="flex flex-col lg:flex-row gap-10 mb-14">
-                    
-                    <div class="flex-1 flex gap-2">
-                        <div class="flex flex-col gap-2 flex-1">
-                            <div class="w-full lg:w-[700px] h-[400px] rounded-[25px] overflow-hidden group cursor-pointer">
-                                <img src="/assets/images/resized_independence_day.png" alt="Independence Day" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                            </div>
-                        </div>
+            <!-- TITLE -->
+            <h1 class="text-2xl md:text-[32px] font-extrabold uppercase mb-10">
+
+                <?= htmlspecialchars($event['title']) ?>
+
+            </h1>
+
+
+            <!-- IMAGE + DESCRIPTION -->
+            <div class="flex flex-col lg:flex-row gap-10 mb-14">
+
+                <!-- IMAGE -->
+                <div class="flex-1">
+
+                    <div class="w-full lg:w-[700px] h-[400px] rounded-[25px] overflow-hidden">
+
+                        <img
+                            src="/uploads/<?= htmlspecialchars($event['image']) ?>"
+                            class="h-full w-full object-cover">
+
                     </div>
 
-                    <div class="flex-1 pt-2 lg:ml-[50px]">
-                        <h2 class="text-[#F00000] text-[32px] font-bold mb-4">Indonesia Merdeka!</h2>
-                        <p class="text-[#333] text-[19px] leading-relaxed text-justify">
-                            Celebrate the spirit of independence with joy and unity through exciting activities, games, and performances. This event brings students together to honor the nation's history, strengthen friendships, and build a sense of togetherness. Enjoy a lively atmosphere filled with enthusiasm, creativity, and pride while creating unforgettable memories that will last for years to come.
-                        </p>
-                    </div>
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-10 items-start">
-                    
-                    <div class="flex-[1.5] lg:border-r-2 border-[#D1D1D1] lg:pr-6 w-full lg:mr-[80px]">
-                        <h2 class="text-2xl font-bold text-[#111] mb-6">Informasi Acara</h2>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Date</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-regular fa-calendar"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium">Friday, August 14, 2026</span>
+                <!-- DESCRIPTION -->
+                <div class="flex-1 pt-2 lg:ml-[50px]">
+
+                    <h2 class="text-[#1e1e1e] text-[32px] font-bold mb-4">
+
+                        <?= htmlspecialchars($event['title']) ?>
+
+                    </h2>
+
+                    <p class="text-[#333] text-[19px] leading-relaxed text-justify">
+
+                        <?= nl2br(htmlspecialchars($event['description'])) ?>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+            <div class="flex flex-col lg:flex-row gap-10 items-start">
+
+                <div class="flex-[1.5] lg:border-r-2 border-[#D1D1D1] lg:pr-6 w-full lg:mr-[80px]">
+
+                    <h2 class="text-2xl font-bold mb-6">
+                        Informasi Acara
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
+
+                        <!-- DATE -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Date
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-regular fa-calendar"></i>
+
                                 </div>
+
+                                <span>
+
+                                    <?= date(
+                                        "l, d F Y",
+                                        strtotime($event['event_date'])
+                                    ) ?>
+
+                                </span>
+
                             </div>
-                            
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Participants</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-solid fa-user-group"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium">Everyone</span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Organizer</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium">Vincent Genesius</span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Time</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-regular fa-clock"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium">07.30 - 14.30</span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Location</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium leading-tight">Lapangan SMKK<br>Immanuel</span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-[#111] mb-2">Attendance</span>
-                                <div class="flex items-center gap-4">
-                                    <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-xl transition-all duration-300 hover:rotate-12 hover:scale-110 cursor-default">
-                                        <i class="fa-solid fa-circle-exclamation"></i>
-                                    </div>
-                                    <span class="text-[18px] text-[#333] font-medium">Compulsory</span>
-                                </div>
-                            </div>
+
                         </div>
+
+
+                        <!-- PARTICIPANTS -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Participants
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-solid fa-user-group"></i>
+
+                                </div>
+
+                                <span>
+
+                                    <?= htmlspecialchars($event['participants']) ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ORGANIZER -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Organizer
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </div>
+
+                                <span>
+
+                                    <?= htmlspecialchars($event['organizer']) ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Category
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-solid fa-layer-group"></i>
+
+                                </div>
+
+                                <span>
+
+                                    <?= ucfirst(htmlspecialchars($event['category'])) ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Location
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                </div>
+
+                                <span>
+
+                                    <?= htmlspecialchars($event['location']) ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REQUIREMENT -->
+                        <div>
+
+                            <span class="font-bold text-xl">
+                                Requirement
+                            </span>
+
+                            <div class="flex items-center gap-4 mt-2">
+
+                                <div class="bg-[#2D5DA1] text-white w-12 h-12 rounded-full flex justify-center items-center">
+
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                                </div>
+
+                                <span>
+
+                                    <?= ucfirst(htmlspecialchars($event['requirement'])) ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="flex-1 w-full">
+                </div>
+
+
+                <!-- REGISTER -->
+                <div class="flex-1 w-full">
                         <h2 class="text-2xl font-bold text-[#111] mb-6">Pendaftaran</h2>
 
                         <div class="mb-5">
@@ -144,11 +270,15 @@ session_start();
                         </p>
                     </div>
 
-                </div>
             </div>
 
-        </main>
-    </div>
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>
+
+
