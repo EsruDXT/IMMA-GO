@@ -19,7 +19,7 @@ $router->add('GET', '/logout', 'AuthController', 'logout');
 $router->add('GET', '/home', 'HomeController', 'homeView');
 
 // Events Page
-$router->add('GET', '/events', 'EventsController', 'eventsView');
+$router->add('GET', '/events', 'EventsController', 'index');
 
 $router->add('GET', '/event/{id}', 'EventsController', 'detail');
 
@@ -28,7 +28,13 @@ $router->add('GET', '/event-detail', 'EventController', 'detail');
 // Profile Page
 $router->add('GET', '/profile', 'ProfileController', 'profileView');
 
+// Admin Events Page
+$router->add('GET', '/admin/events', 'Admin\EventsController', 'index');
 
+$router->add('GET', '/admin/events/create', 'Admin\EventsController', 'create');
 
+$router->add('POST', '/admin/events/store', 'Admin\EventsController', 'store');
+
+$router->add('GET', '/admin/events/edit/{id}', 'Admin\EventsController', 'edit');
 
 $router->run();

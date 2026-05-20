@@ -22,7 +22,7 @@ $user = $_SESSION['user'] ?? null;
 
                 <div class="relative ml-auto">
 
-                    <!-- TRIGGER -->
+                    <!-- Profile -->
                     <div onclick="window.location.href='/profile'" class="cursor-pointer flex items-center gap-[10px]">
 
                         <div class="mr-[10px] text-right">
