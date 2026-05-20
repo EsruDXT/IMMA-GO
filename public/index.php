@@ -37,4 +37,8 @@ $router->add('POST', '/admin/events/store', 'Admin\EventsController', 'store');
 
 $router->add('GET', '/admin/events/edit/{id}', 'Admin\EventsController', 'edit');
 
+$router->add('POST', '/admin/events/update', 'Admin\EventsController', 'update');
+
+$router->add('GET','/admin/events/delete/{id}','Admin\EventsController','delete');
+
 $router->run();
