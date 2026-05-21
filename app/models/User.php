@@ -11,22 +11,43 @@ class User extends Database
     protected $table = 'users';
 
     // GET ALL USERS
-    public function getUsers()
-    {
-        $users = [];
+    public function getUsers(
+    $sort = 'date',
+    $order = 'DESC'
+)
+{
+    $allowedSort = [
 
-        $query = "SELECT * FROM {$this->table}";
-        $stmt = $this->connection->prepare($query);
-        $stmt->execute();
+        'name' => 'name',
+        'date' => 'created_at'
 
-        $result = $stmt->get_result();
+    ];
 
-        while ($user = $result->fetch_assoc()) {
-            $users[] = $user;
-        }
+    $sortColumn =
+        $allowedSort[$sort]
+        ?? 'created_at';
 
-        return $users;
-    }
+    $order =
+        strtoupper($order) === 'ASC'
+        ? 'ASC'
+        : 'DESC';
+
+    $query = "
+        SELECT *
+        FROM {$this->table}
+        ORDER BY $sortColumn $order
+    ";
+
+    $stmt =
+        $this->connection
+        ->prepare($query);
+
+    $stmt->execute();
+
+    return $stmt
+        ->get_result()
+        ->fetch_all(MYSQLI_ASSOC);
+}
 
     // GET USER BY ID
     public function getUserById(int $id)

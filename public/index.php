@@ -41,4 +41,17 @@ $router->add('POST', '/admin/events/update', 'Admin\EventsController', 'update')
 
 $router->add('GET','/admin/events/delete/{id}','Admin\EventsController','delete');
 
+// User Management
+$router->add('GET', '/admin/users', 'Admin\UserController', 'index');
+
+$router->add('GET', '/admin/users/create', 'Admin\UserController', 'create');
+
+$router->add('POST', '/admin/users/store', 'Admin\UserController', 'store');
+
+$router->add('GET', '/admin/users/edit/{id}', 'Admin\UserController', 'edit');
+
+$router->add('POST', '/admin/users/update', 'Admin\UserController', 'update');
+
+$router->add('GET', '/admin/users/delete/{id}', 'Admin\UserController', 'delete');
+
 $router->run();
