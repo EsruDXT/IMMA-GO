@@ -49,7 +49,56 @@ class EventsController
     {
         $this->checkAdmin();
 
+        $eventModel = new Event();
+
+        $event = $eventModel->findById($id);
+
         require_once '../app/views/admin/event/edit.php';
+    }
+
+
+
+    public function update()
+    {
+        $this->checkAdmin();
+
+        $eventModel = new Event();
+
+        // pakai gambar lama dulu
+        $imageName = $_POST['old_image'];
+
+        // kalau upload gambar baru
+        if (
+            isset($_FILES['image']) &&
+            $_FILES['image']['error'] === 0
+        ) {
+
+            $imageName =
+                time() . "_" . $_FILES['image']['name'];
+
+            move_uploaded_file(
+                $_FILES['image']['tmp_name'],
+                '../public/uploads/' . $imageName
+            );
+        }
+
+        $eventModel->update([
+
+            'id' => $_POST['id'],
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+            'image' => $imageName,
+            'category' => $_POST['category'],
+            'class_target' => $_POST['class_target'],
+            'requirement' => $_POST['requirement'],
+            'location' => $_POST['location'],
+            'event_date' => $_POST['event_date'],
+            'organizer' => $_POST['organizer']
+
+        ]);
+
+        header("Location: /admin/events");
+        exit;
     }
 
     // STORE EVENT
@@ -87,6 +136,18 @@ class EventsController
             'organizer' => $_POST['organizer'],
             'created_by' => $_SESSION['user']['id']
         ]);
+
+        header("Location: /admin/events");
+        exit;
+    }
+
+    public function delete($id)
+    {
+        $this->checkAdmin();
+
+        $eventModel = new Event();
+
+        $eventModel->softDelete($id);
 
         header("Location: /admin/events");
         exit;

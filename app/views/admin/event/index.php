@@ -67,136 +67,137 @@
                             </button>
                         </div>
                     </div>
-<!-- EVENT CARDS -->
-<div class="flex flex-col gap-[20px]">
+                    <!-- EVENT CARDS -->
+                    <div class="flex flex-col gap-[20px]">
 
-    
-    <?php $events = $events ?? []; foreach ($events as $event): ?>
 
-        <div
-            class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
-            data-date="<?= $event['event_date'] ?>"
-            data-category="<?= $event['category'] ?>"
-            data-class="<?= $event['class_target'] ?>"
-            data-req="<?= $event['requirement'] ?>">
+                        <?php $events = $events ?? [];
+                        foreach ($events as $event): ?>
 
-            <!-- IMAGE -->
-            <div class="w-[30%] relative">
+                            <div
+                                class="event-card group relative bg-[#3A6CB5] rounded-[20px] overflow-hidden flex text-white h-[240px] shadow-sm transition-all duration-300 hover:scale-[1.01]"
+                                data-date="<?= $event['event_date'] ?>"
+                                data-category="<?= $event['category'] ?>"
+                                data-class="<?= $event['class_target'] ?>"
+                                data-req="<?= $event['requirement'] ?>">
 
-                <img
-                    src="/uploads/<?= $event['image'] ?>"
-                    alt="<?= $event['title'] ?>"
-                    class="h-full w-full object-cover">
+                                <!-- IMAGE -->
+                                <div class="w-[30%] relative">
 
-                <div class="absolute bottom-[15px] w-full flex justify-center">
+                                    <img
+                                        src="/uploads/<?= $event['image'] ?>"
+                                        alt="<?= $event['title'] ?>"
+                                        class="h-full w-full object-cover">
 
-                    <button
-                        onclick="window.location.href='/event/<?= $event['id'] ?>'"
-                        class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">
+                                    <div class="absolute bottom-[15px] w-full flex justify-center">
 
-                        Learn More
+                                        <button
+                                            onclick="window.location.href='/event/<?= $event['id'] ?>'"
+                                            class="bg-[#6489BF] hover:bg-[#4E73A5] px-[20px] py-[6px] rounded-[10px] text-[14px] font-bold shadow-md transition">
 
-                    </button>
+                                            Learn More
 
-                </div>
-            </div>
+                                        </button>
 
-            <!-- CONTENT -->
-            <div class="w-[70%] p-[25px] flex flex-col justify-center">
+                                    </div>
+                                </div>
 
-                <h2 class="text-[20px] font-bold mb-[8px]">
-                    <?= $event['title'] ?>
-                </h2>
+                                <!-- CONTENT -->
+                                <div class="w-[70%] p-[25px] flex flex-col justify-center">
 
-                <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed line-clamp-3">
-                    <?= $event['description'] ?>
-                </p>
+                                    <h2 class="text-[20px] font-bold mb-[8px]">
+                                        <?= $event['title'] ?>
+                                    </h2>
 
-                <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
+                                    <p class="text-[13px] text-gray-200 mb-[20px] leading-relaxed line-clamp-3">
+                                        <?= $event['description'] ?>
+                                    </p>
 
-                    <!-- DATE -->
-                    <div class="flex items-center gap-[12px]">
+                                    <div class="grid grid-cols-2 gap-y-[15px] gap-x-[10px] text-[13px]">
 
-                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-calendar-alt"></i>
-                        </div>
+                                        <!-- DATE -->
+                                        <div class="flex items-center gap-[12px]">
 
-                        <span>
-                            <?= date('l, d F Y', strtotime($event['event_date'])) ?>
-                        </span>
+                                            <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                                                <i class="fa fa-calendar-alt"></i>
+                                            </div>
 
+                                            <span>
+                                                <?= date('l, d F Y', strtotime($event['event_date'])) ?>
+                                            </span>
+
+                                        </div>
+
+                                        <!-- ORGANIZER -->
+                                        <div class="flex items-center gap-[12px]">
+
+                                            <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+
+                                            <span>
+                                                <?= $event['organizer'] ?>
+                                            </span>
+
+                                        </div>
+
+                                        <!-- LOCATION -->
+                                        <div class="flex items-center gap-[12px]">
+
+                                            <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                                                <i class="fa fa-map-marker-alt"></i>
+                                            </div>
+
+                                            <span>
+                                                <?= $event['location'] ?>
+                                            </span>
+
+                                        </div>
+
+                                        <!-- CLASS -->
+                                        <div class="flex items-center gap-[12px]">
+
+                                            <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
+                                                <i class="fa fa-th-large"></i>
+                                            </div>
+
+                                            <span>
+                                                <?= strtoupper($event['class_target']) ?>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- ACTION BUTTON -->
+                                <div
+                                    class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
+
+                                    <!-- EDIT -->
+                                    <button
+                                        onclick="window.location.href='/admin/events/edit/<?= $event['id'] ?>'"
+                                        class="text-white text-[22px] hover:scale-125 transition duration-200">
+
+                                        <i class="fa fa-pen"></i>
+
+                                    </button>
+
+                                    <!-- DELETE -->
+                                    <button
+                                        onclick="openDeleteModal(<?= $event['id'] ?>)"
+                                        class="text-white text-[22px] hover:scale-125 transition duration-200">
+
+                                        <i class="fa fa-trash"></i>
+
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        <?php endforeach; ?>
                     </div>
 
-                    <!-- ORGANIZER -->
-                    <div class="flex items-center gap-[12px]">
-
-                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-user"></i>
-                        </div>
-
-                        <span>
-                            <?= $event['organizer'] ?>
-                        </span>
-
-                    </div>
-
-                    <!-- LOCATION -->
-                    <div class="flex items-center gap-[12px]">
-
-                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-map-marker-alt"></i>
-                        </div>
-
-                        <span>
-                            <?= $event['location'] ?>
-                        </span>
-
-                    </div>
-
-                    <!-- CLASS -->
-                    <div class="flex items-center gap-[12px]">
-
-                        <div class="bg-[#6489BF] rounded-full w-[35px] h-[35px] flex items-center justify-center flex-shrink-0">
-                            <i class="fa fa-th-large"></i>
-                        </div>
-
-                        <span>
-                            <?= strtoupper($event['class_target']) ?>
-                        </span>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ACTION BUTTON -->
-            <div
-                class="absolute top-0 right-[-50px] group-hover:right-0 h-full w-[50px] bg-[#6D8FC4] flex flex-col items-center justify-center gap-[25px] transition-all duration-300 ease-in-out rounded-l-[20px] shadow-lg">
-
-                <!-- EDIT -->
-                <button
-                    onclick="window.location.href='/admin/events/edit/<?= $event['id'] ?>'"
-                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-
-                    <i class="fa fa-pen"></i>
-
-                </button>
-
-                <!-- DELETE -->
-                <button
-                    onclick="deleteEvent(<?= $event['id'] ?>)"
-                    class="text-white text-[22px] hover:scale-125 transition duration-200">
-
-                    <i class="fa fa-trash"></i>
-
-                </button>
-
-            </div>
-        </div>
-
-    <?php endforeach; ?>
-                    </div>
-                    
                 </div>
 
                 <!-- CALENDAR -->
@@ -290,7 +291,71 @@
     </div>
     </div>
 
-    <script src="/js/event/events.js"></script>
+    
+    <!-- DELETE POPUP -->
+    <div id="deleteModal"
+        class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+        <div class="bg-[#3A66A8] w-[500px] rounded-[20px] px-[35px] py-[25px] relative text-white">
+
+            <!-- Close -->
+            <button
+                onclick="closeDeleteModal()"
+                class="absolute top-[20px] right-[20px] text-[35px] leading-none">
+                &times;
+            </button>
+
+            <!-- Title -->
+            <div class="flex justify-center items-center gap-[10px]">
+
+                <h2 class="text-[28px] font-bold">
+                    Peringatan
+                </h2>
+
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-[30px]"></i>
+
+            </div>
+
+            <hr class="my-[15px] border-white">
+
+            <!-- Text -->
+            <div class="text-center">
+
+                <h3 class="text-[18px] font-bold mb-[10px]">
+                    Are you sure you want to delete this event?
+                </h3>
+
+                <p class="text-[14px] text-gray-200">
+                    Just making sure—this can't be undone.
+                </p>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center gap-[20px] mt-[30px]">
+
+                <a id="deleteLink"
+                    href="#"
+                    class="border-2 border-white px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-white hover:text-[#3A66A8] transition">
+
+                    Continue
+
+                </a>
+
+                <button
+                    onclick="closeDeleteModal()"
+                    class="bg-[#6C8DC1] px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-[#86A1CC] transition">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="/js/admin/event/index.js"></script>
 </body>
 
 </html>
