@@ -240,35 +240,74 @@
 
 
                 <!-- REGISTER -->
-                <div class="flex-1 w-full">
-                        <h2 class="text-2xl font-bold text-[#111] mb-6">Pendaftaran</h2>
+<div class="flex-1 w-full">
 
-                        <div class="mb-5">
-                            <label class="block text-[15px] font-semibold mb-3" for="competition-select">Daftar Kompetisi</label>
-                            
-                            <div class="relative w-full group">
-                                <select id="competition-select" class="w-[300px] bg-[#6488C4] text-white px-5 py-3.5 rounded-xl text-sm font-semibold tracking-wide appearance-none outline-none cursor-pointer shadow-sm hover:bg-[#5274A8] hover:shadow-md focus:ring-4 focus:ring-[#6488C4]/40 transition-all duration-300 pr-12">
-                                    <option value="" class="bg-white text-gray-400 font-normal">Select Competitions</option>
-                                    <option value="Tarik Tambang" class="bg-white text-gray-800 font-medium py-2">Tarik Tambang</option>
-                                    <option value="Balap Karung" class="bg-white text-gray-800 font-medium py-2">Balap Karung</option>
-                                    <option value="Makan Kerupuk" class="bg-white text-gray-800 font-medium py-2">Makan Kerupuk</option>
-                                    <option value="Bola Air" class="bg-white text-gray-800 font-medium py-2">Bola Air</option>
-                                </select>
-                                
-                                <div class="absolute right-[180px] top-1/2 -translate-y-1/2 text-white pointer-events-none transition-transform duration-300 group-hover:translate-y-0.5">
-                                    <i class="fa-solid fa-chevron-down text-sm"></i>
-                                </div>
-                            </div>
-                        </div>
+    <h2 class="text-2xl font-bold text-[#111] mb-6">
+        Pendaftaran
+    </h2>
 
-                        <button id="btn-register" class="w-full bg-[#6488C4] text-white py-4 rounded-xl font-semibold text-base mt-20 hover:bg-[#5274A8] hover:-translate-y-1 hover:shadow-lg focus:ring-4 focus:ring-[#6488C4]/40 transition-all duration-300">
-                            Register
-                        </button>
-                        
-                        <p class="text-center text-xs font-medium text-[#111] mt-4 leading-relaxed">
-                            Why Watch The Moment When You Could Be The<br>Moment? Register Now!
-                        </p>
-                    </div>
+    <?php if($event['category'] == 'event'): ?>
+
+        <!-- KHUSUS KOMPETISI -->
+        <div class="mb-5">
+
+            <label class="block text-[15px] font-semibold mb-3">
+
+                Daftar Kompetisi
+
+            </label>
+
+            <div class="relative">
+
+                <!-- Select Competition -->
+<select id="competition-select"
+class="w-[300px] bg-[#6488C4] text-white px-5 py-3 rounded-xl">
+
+    <option value="">Select Competition</option>
+
+    <option value="anak-ayam">
+        Lomba Anak Ayam
+    </option>
+
+    <option value="protect-the-queen">
+        Lomba Protect The Queen
+    </option>
+
+    <option value="cup-of-chaos">
+        Lomba Cup of Chaos
+    </option>
+
+</select>
+
+
+<!-- Register Button -->
+<button
+    id="btn-register"
+    data-event-id="<?= $event['id'] ?>"
+    class="w-full bg-[#6488C4] text-white py-4 rounded-xl font-semibold mt-20">
+
+    Register
+
+</button>
+
+            </div>
+
+        </div>
+
+    <?php else: ?>
+
+        <!-- KHUSUS LOMBA TANPA KATEGORI -->
+        <button
+            id="btn-register"
+            class="w-full bg-[#6488C4] text-white py-4 rounded-xl font-semibold mt-20">
+
+            Register
+
+        </button>
+
+    <?php endif; ?>
+
+</div>
 
             </div>
 
@@ -278,7 +317,9 @@
 
 </div>
 
+<script src="/js/event/event-details.js"></script>
 </body>
+
 </html>
 
 

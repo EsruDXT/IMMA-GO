@@ -7,7 +7,7 @@ require_once '../app/models/Event.php';
 use App\Models\Event;
 
 class EventsController
-{   
+{
     public function index()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -49,4 +49,13 @@ class EventsController
 
         require_once '../app/views/event/event-detail.php';
     }
+
+public function register()
+{
+    $competition = $_GET['competition'] ?? '';
+
+    $eventId = $_GET['id'] ?? null;
+
+    require_once '../app/views/event/register.php';
+}
 }
