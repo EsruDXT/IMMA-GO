@@ -42,10 +42,50 @@ class UserController
         '../app/views/admin/user/index.php';
 }
 
-    public function create()
-    {
-        $this->checkAdmin();
+public function create()
+{
+    $this->checkAdmin();
 
-        require_once '../app/views/admin/user/create.php';
+    require_once
+        '../app/views/admin/user/create.php';
+}
+
+public function store()
+{
+    $this->checkAdmin();
+
+    $userModel = new User();
+
+    $success = $userModel->insert([
+
+        'name' => $_POST['name'],
+        'email' => $_POST['email'],
+        'password' => $_POST['password'],
+        'role' => $_POST['role']
+
+    ]);
+
+    if(!$success){
+
+        $_SESSION['error'] =
+            "Email already exists";
+
+        header("Location: /admin/users/create");
+        exit;
     }
+
+    header("Location: /admin/users");
+    exit;
+}
+
+public function delete(int $id)
+{
+    $this->checkAdmin();
+
+    $userModel = new User();
+    $userModel->delete($id);
+
+    header("Location: /admin/users");
+    exit;
+}
 }

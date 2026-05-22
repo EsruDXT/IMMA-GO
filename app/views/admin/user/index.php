@@ -35,7 +35,7 @@
 
                 </button>
 
-                <h1 class="text-[28px]">
+                <h1 class="text-[28px] font-bold">
                     Back
                 </h1>
 
@@ -231,7 +231,7 @@ $currentOrder = $_GET['order'] ?? 'DESC';
                                     </a>
 
                                     <a
-                                        href="/admin/users/delete/<?= $user['id'] ?>"
+                                        onclick="openDeleteModal(<?= $user['id'] ?>)"
                                         class="text-red-500 font-bold">
 
                                         Delete
@@ -254,6 +254,69 @@ $currentOrder = $_GET['order'] ?? 'DESC';
         </div>
     </div>
 
+    <!-- Delete Popup -->
+    <div id="deleteModal"
+        class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+        <div class="bg-[#3A66A8] w-[500px] rounded-[20px] px-[35px] py-[25px] relative text-white">
+
+            <!-- Close -->
+            <button
+                onclick="closeDeleteModal()"
+                class="absolute top-[20px] right-[20px] text-[35px] leading-none">
+                &times;
+            </button>
+
+            <!-- Title -->
+            <div class="flex justify-center items-center gap-[10px]">
+
+                <h2 class="text-[28px] font-bold">
+                    Peringatan
+                </h2>
+
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-[30px]"></i>
+
+            </div>
+
+            <hr class="my-[15px] border-white">
+
+            <!-- Text -->
+            <div class="text-center">
+
+                <h3 class="text-[18px] font-bold mb-[10px]">
+                    Are you sure you want to delete this event?
+                </h3>
+
+                <p class="text-[14px] text-gray-200">
+                    Just making sure—this can't be undone.
+                </p>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center gap-[20px] mt-[30px]">
+
+                <a id="deleteLink"
+                    href="#"
+                    class="border-2 border-white px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-white hover:text-[#3A66A8] transition">
+
+                    Continue
+
+                </a>
+
+                <button
+                    onclick="closeDeleteModal()"
+                    class="bg-[#6C8DC1] px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-[#86A1CC] transition">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
 <script src="/js/admin/user/index.js"></script>
 
