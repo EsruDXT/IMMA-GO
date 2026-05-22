@@ -16,7 +16,7 @@ class EventsController
     public function create()
     {
         // Your project currently has the add-event UI under app/views/Add event/addevent.php
-        require_once '../app/views/Add event/addevent.php';
+        require_once '../app/views/Addevent/addevent.php';
     }
 
     public function store()

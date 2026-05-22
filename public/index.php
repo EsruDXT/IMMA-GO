@@ -26,8 +26,10 @@ $router->add('GET', '/event/{id}', 'EventsController', 'detail');
 $router->add('GET', '/event-detail', 'EventController', 'detail');
 
 $router->add('GET', '/events/create', 'AddEventController', 'addEventView');
-
 // Profile Page
 $router->add('GET', '/profile', 'ProfileController', 'profileView');
+
+// Honors page
+$router->add('GET', '/Honors', 'HonorsController', 'HonorsView');
 
 $router->run();
