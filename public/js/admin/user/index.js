@@ -24,7 +24,7 @@ function openDeleteModal(id)
 
     document
         .getElementById("deleteLink")
-        .href = `/admin/events/delete/${id}`;
+        .href = `/admin/users/delete/${id}`;
 }
 
 function closeDeleteModal()

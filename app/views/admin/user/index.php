@@ -284,7 +284,7 @@ $currentOrder = $_GET['order'] ?? 'DESC';
             <div class="text-center">
 
                 <h3 class="text-[18px] font-bold mb-[10px]">
-                    Are you sure you want to delete this event?
+                    Are you sure you want to delete this user?
                 </h3>
 
                 <p class="text-[14px] text-gray-200">

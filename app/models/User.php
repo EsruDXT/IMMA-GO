@@ -12,68 +12,98 @@ class User extends Database
 
     // GET ALL USERS
     public function getUsers(
-    $sort = 'date',
-    $order = 'DESC'
-)
-{
-    $allowedSort = [
+        $sort = 'date',
+        $order = 'DESC'
+    ) {
+        $allowedSort = [
 
-        'name' => 'name',
-        'date' => 'created_at'
+            'name' => 'name',
+            'date' => 'created_at'
 
-    ];
+        ];
 
-    $sortColumn =
-        $allowedSort[$sort]
-        ?? 'created_at';
+        $sortColumn =
+            $allowedSort[$sort]
+            ?? 'created_at';
 
-    $order =
-        strtoupper($order) === 'ASC'
-        ? 'ASC'
-        : 'DESC';
+        $order =
+            strtoupper($order) === 'ASC'
+            ? 'ASC'
+            : 'DESC';
 
-    $query = "
-        SELECT *
-        FROM {$this->table}
-        ORDER BY $sortColumn $order
-    ";
+        $query = "
+            SELECT *
+            FROM {$this->table}
+            WHERE deleted_at IS NULL
+            ORDER BY $sortColumn $order
+        ";
 
-    $stmt =
-        $this->connection
-        ->prepare($query);
+        $stmt =
+            $this->connection
+            ->prepare($query);
 
-    $stmt->execute();
+        $stmt->execute();
 
-    return $stmt
-        ->get_result()
-        ->fetch_all(MYSQLI_ASSOC);
-}
+        return $stmt
+            ->get_result()
+            ->fetch_all(MYSQLI_ASSOC);
+    }
 
     // GET USER BY ID
     public function getUserById(int $id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE id = ?";
+        $query = "
+    SELECT *
+    FROM {$this->table}
+    WHERE id = ?
+    AND deleted_at IS NULL
+";
 
-        $stmt = $this->connection->prepare($query);
-        $stmt->bind_param("i", $id);
+        $stmt =
+            $this->connection
+            ->prepare($query);
+
+        $stmt->bind_param(
+            "i",
+            $id
+        );
+
         $stmt->execute();
 
-        return $stmt->get_result()->fetch_assoc();
+        return $stmt
+            ->get_result()
+            ->fetch_assoc();
     }
 
-    // REGISTER
+    // REGISTER / INSERT USER
     public function insert(array $data)
     {
-        $name = htmlspecialchars(trim($data['name']));
-        $email = strtolower(trim($data['email']));
-        $password = password_hash($data['password'], PASSWORD_DEFAULT);
+        $name =
+            htmlspecialchars(
+                trim($data['name'])
+            );
 
-        // DEFAULT ROLE
-        $role = $data['role'] ?? 'student';
+        $email =
+            strtolower(
+                trim($data['email'])
+            );
 
-        // CEK EMAIL DUPLIKAT
+        $password =
+            password_hash(
+                $data['password'],
+                PASSWORD_DEFAULT
+            );
+
+        $role =
+            $data['role']
+            ?? 'student';
+
+        // CEK EMAIL DUPLIKAT (hanya user aktif)
         $check = $this->connection->prepare(
-            "SELECT id FROM {$this->table} WHERE email = ?"
+            "SELECT id
+     FROM {$this->table}
+     WHERE email = ?
+     AND deleted_at IS NULL"
         );
 
         $check->bind_param("s", $email);
@@ -83,12 +113,22 @@ class User extends Database
             return false;
         }
 
-        // INSERT USER
-        $query = "INSERT INTO {$this->table}
-                  (name, email, password, role)
-                  VALUES (?, ?, ?, ?)";
+        // INSERT
+        $query = "
+            INSERT INTO {$this->table}
+            (
+                name,
+                email,
+                password,
+                role
+            )
+            VALUES
+            (?, ?, ?, ?)
+        ";
 
-        $stmt = $this->connection->prepare($query);
+        $stmt =
+            $this->connection
+            ->prepare($query);
 
         $stmt->bind_param(
             "ssss",
@@ -102,33 +142,51 @@ class User extends Database
     }
 
     // LOGIN
-    public function login(string $email, string $password)
-    {
-        $email = strtolower(trim($email));
+    public function login(
+        string $email,
+        string $password
+    ) {
+        $email =
+            strtolower(
+                trim($email)
+            );
 
         $query = "SELECT
-                    id,
-                    name,
-                    email,
-                    password,
-                    role
-                  FROM {$this->table}
-                  WHERE email = ?";
+            id,
+            name,
+            email,
+            password,
+            role
+          FROM {$this->table}
+          WHERE email = ?
+          AND deleted_at IS NULL";
 
-        $stmt = $this->connection->prepare($query);
+        $stmt =
+            $this->connection
+            ->prepare($query);
 
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param(
+            "s",
+            $email
+        );
+
         $stmt->execute();
 
-        $user = $stmt->get_result()->fetch_assoc();
+        $user =
+            $stmt
+            ->get_result()
+            ->fetch_assoc();
 
-        // USER TIDAK ADA
         if (!$user) {
             return false;
         }
 
-        // PASSWORD BENAR
-        if (password_verify($password, $user['password'])) {
+        if (
+            password_verify(
+                $password,
+                $user['password']
+            )
+        ) {
             return $user;
         }
 
@@ -136,29 +194,45 @@ class User extends Database
     }
 
     // UPDATE USER
-    public function update(array $data, int $id)
-    {
-        $name = htmlspecialchars(trim($data['name']));
-        $email = strtolower(trim($data['email']));
-        $role = $data['role'];
-
-        // UPDATE DENGAN PASSWORD BARU
-        if (!empty($data['password'])) {
-
-            $password = password_hash(
-                $data['password'],
-                PASSWORD_DEFAULT
+    public function update(
+        array $data,
+        int $id
+    ) {
+        $name =
+            htmlspecialchars(
+                trim($data['name'])
             );
 
-            $query = "UPDATE {$this->table}
-                      SET
-                        name = ?,
-                        email = ?,
-                        password = ?,
-                        role = ?
-                      WHERE id = ?";
+        $email =
+            strtolower(
+                trim($data['email'])
+            );
 
-            $stmt = $this->connection->prepare($query);
+        $role =
+            $data['role'];
+
+        if (!empty($data['password'])) {
+
+            $password =
+                password_hash(
+                    $data['password'],
+                    PASSWORD_DEFAULT
+                );
+
+            $query = "
+                UPDATE {$this->table}
+                SET
+                    name=?,
+                    email=?,
+                    password=?,
+                    role=?
+                WHERE id=?
+                AND deleted_at IS NULL
+            ";
+
+            $stmt =
+                $this->connection
+                ->prepare($query);
 
             $stmt->bind_param(
                 "ssssi",
@@ -168,18 +242,21 @@ class User extends Database
                 $role,
                 $id
             );
-
         } else {
 
-            // UPDATE TANPA GANTI PASSWORD
-            $query = "UPDATE {$this->table}
-                      SET
-                        name = ?,
-                        email = ?,
-                        role = ?
-                      WHERE id = ?";
+            $query = "
+                UPDATE {$this->table}
+                SET
+                    name=?,
+                    email=?,
+                    role=?
+                WHERE id=?
+                AND deleted_at IS NULL
+            ";
 
-            $stmt = $this->connection->prepare($query);
+            $stmt =
+                $this->connection
+                ->prepare($query);
 
             $stmt->bind_param(
                 "sssi",
@@ -193,17 +270,28 @@ class User extends Database
         return $stmt->execute();
     }
 
-    // DELETE USER
+    // SOFT DELETE
     public function delete(int $id)
     {
-        $query = "DELETE FROM {$this->table} WHERE id = ?";
+        $query = "
+            UPDATE {$this->table}
+            SET deleted_at = NOW()
+            WHERE id = ?
+            AND deleted_at IS NULL
+        ";
 
-        $stmt = $this->connection->prepare($query);
-        $stmt->bind_param("i", $id);
+        $stmt =
+            $this->connection
+            ->prepare($query);
+
+        $stmt->bind_param(
+            "i",
+            $id
+        );
 
         $stmt->execute();
 
-        return $stmt->affected_rows > 0;
+        return
+            $stmt->affected_rows > 0;
     }
 }
-?>
