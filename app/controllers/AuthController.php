@@ -8,7 +8,6 @@ use App\Models\User;
 
 class AuthController
 {
-
     private function startSession()
     {
         if (session_status() === PHP_SESSION_NONE) {

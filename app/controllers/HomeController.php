@@ -3,10 +3,24 @@ namespace App\Controllers;
 
 class HomeController
 {
-    public function homeView()
+    private function checkAuth()
     {
-        require_once '../app/views/home.php';
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user'])) {
+            header("Location: /login");
+            exit;
+        }
     }
 
+    public function homeView()
+    {
+        $this->checkAuth();
+
+        require_once '../app/views/home.php';
+    }
 }
+
 ?>

@@ -7,7 +7,7 @@ require_once '../app/models/Event.php';
 use App\Models\Event;
 
 class EventsController
-{
+{   
     public function index()
     {
         if (session_status() === PHP_SESSION_NONE) {
