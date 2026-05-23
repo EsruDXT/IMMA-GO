@@ -81,67 +81,67 @@
                             class="hidden absolute top-[60px] right-0 bg-[#6489BF] w-[180px] rounded-[10px] text-white p-[15px] shadow-lg z-50">
 
                             <?php
-$currentSort = $_GET['sort'] ?? 'date';
-$currentOrder = $_GET['order'] ?? 'DESC';
-?>
+                            $currentSort = $_GET['sort'] ?? 'date';
+                            $currentOrder = $_GET['order'] ?? 'DESC';
+                            ?>
 
-    <ul class="space-y-[12px]">
+                            <ul class="space-y-[12px]">
 
-        <li>
-            <a
-                href="?sort=name&order=<?= $currentOrder ?>"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=name&order=<?= $currentOrder ?>"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentSort=='name' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentSort == 'name' ? '•' : '' ?>
+                                        </span>
 
-                Name
-            </a>
-        </li>
+                                        Name
+                                    </a>
+                                </li>
 
-        <li>
-            <a
-                href="?sort=date&order=<?= $currentOrder ?>"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=date&order=<?= $currentOrder ?>"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentSort=='date' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentSort == 'date' ? '•' : '' ?>
+                                        </span>
 
-                Date
-            </a>
-        </li>
+                                        Date
+                                    </a>
+                                </li>
 
-        <hr>
+                                <hr>
 
-        <li>
-            <a
-                href="?sort=<?= $currentSort ?>&order=ASC"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=<?= $currentSort ?>&order=ASC"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentOrder=='ASC' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentOrder == 'ASC' ? '•' : '' ?>
+                                        </span>
 
-                Ascending
-            </a>
-        </li>
+                                        Ascending
+                                    </a>
+                                </li>
 
-        <li>
-            <a
-                href="?sort=<?= $currentSort ?>&order=DESC"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=<?= $currentSort ?>&order=DESC"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentOrder=='DESC' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentOrder == 'DESC' ? '•' : '' ?>
+                                        </span>
 
-                Descending
-            </a>
-        </li>
+                                        Descending
+                                    </a>
+                                </li>
 
-    </ul>
+                            </ul>
 
 
                         </div>

@@ -72,4 +72,23 @@ $router->add('GET', '/competition/detail/{id}', 'CompetitionController', 'detail
 // Management Routes
 $router->add('GET', '/admin/manage', 'Admin\ManageController', 'manageView');
 
+// Admin Honors
+$router->add('GET', '/admin/honors', 'Admin\HonorController', 'index');
+
+$router->add('GET', '/admin/honors/create', 'Admin\HonorController', 'create');
+
+$router->add('POST', '/admin/honors/store', 'Admin\HonorController', 'store');
+
+$router->add('GET', '/admin/honors/edit/{id}', 'Admin\HonorController', 'edit');
+
+$router->add('POST', '/admin/honors/update/{id}', 'Admin\HonorController', 'update');
+
+$router->add('GET', '/admin/honors/delete/{id}', 'Admin\HonorController', 'delete');
+
+//Honors Likes
+$router->add('POST', '/honors/like/{id}', 'Admin\HonorController', 'like');
+
+//User Honors
+$router->add('GET', '/honors', 'Admin\HonorController', 'index');
+
 $router->run();
