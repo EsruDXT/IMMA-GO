@@ -15,3 +15,21 @@ document.addEventListener("click", (e) => {
     }
 
 });
+
+function openDeleteModal(id)
+{
+    document
+        .getElementById("deleteModal")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("deleteLink")
+        .href = `/admin/users/delete/${id}`;
+}
+
+function closeDeleteModal()
+{
+    document
+        .getElementById("deleteModal")
+        .classList.add("hidden");
+}

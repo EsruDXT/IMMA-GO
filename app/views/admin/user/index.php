@@ -28,14 +28,14 @@
             <div class="flex items-center gap-5">
 
                 <button
-                    onclick="history.back()"
+                    onclick="window.location.href='/admin/manage'"
                     class="bg-[#6489BF] text-white w-[40px] h-[40px] rounded">
 
                     <i class="fa-solid fa-chevron-left"></i>
 
                 </button>
 
-                <h1 class="text-[28px]">
+                <h1 class="text-[28px] font-bold">
                     Back
                 </h1>
 
@@ -81,67 +81,67 @@
                             class="hidden absolute top-[60px] right-0 bg-[#6489BF] w-[180px] rounded-[10px] text-white p-[15px] shadow-lg z-50">
 
                             <?php
-$currentSort = $_GET['sort'] ?? 'date';
-$currentOrder = $_GET['order'] ?? 'DESC';
-?>
+                            $currentSort = $_GET['sort'] ?? 'date';
+                            $currentOrder = $_GET['order'] ?? 'DESC';
+                            ?>
 
-    <ul class="space-y-[12px]">
+                            <ul class="space-y-[12px]">
 
-        <li>
-            <a
-                href="?sort=name&order=<?= $currentOrder ?>"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=name&order=<?= $currentOrder ?>"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentSort=='name' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentSort == 'name' ? '•' : '' ?>
+                                        </span>
 
-                Name
-            </a>
-        </li>
+                                        Name
+                                    </a>
+                                </li>
 
-        <li>
-            <a
-                href="?sort=date&order=<?= $currentOrder ?>"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=date&order=<?= $currentOrder ?>"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentSort=='date' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentSort == 'date' ? '•' : '' ?>
+                                        </span>
 
-                Date
-            </a>
-        </li>
+                                        Date
+                                    </a>
+                                </li>
 
-        <hr>
+                                <hr>
 
-        <li>
-            <a
-                href="?sort=<?= $currentSort ?>&order=ASC"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=<?= $currentSort ?>&order=ASC"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentOrder=='ASC' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentOrder == 'ASC' ? '•' : '' ?>
+                                        </span>
 
-                Ascending
-            </a>
-        </li>
+                                        Ascending
+                                    </a>
+                                </li>
 
-        <li>
-            <a
-                href="?sort=<?= $currentSort ?>&order=DESC"
-                class="flex items-center gap-[8px] hover:text-gray-200">
+                                <li>
+                                    <a
+                                        href="?sort=<?= $currentSort ?>&order=DESC"
+                                        class="flex items-center gap-[8px] hover:text-gray-200">
 
-                <span class="w-[10px]">
-                    <?= $currentOrder=='DESC' ? '•' : '' ?>
-                </span>
+                                        <span class="w-[10px]">
+                                            <?= $currentOrder == 'DESC' ? '•' : '' ?>
+                                        </span>
 
-                Descending
-            </a>
-        </li>
+                                        Descending
+                                    </a>
+                                </li>
 
-    </ul>
+                            </ul>
 
 
                         </div>
@@ -231,7 +231,7 @@ $currentOrder = $_GET['order'] ?? 'DESC';
                                     </a>
 
                                     <a
-                                        href="/admin/users/delete/<?= $user['id'] ?>"
+                                        onclick="openDeleteModal(<?= $user['id'] ?>)"
                                         class="text-red-500 font-bold">
 
                                         Delete
@@ -254,6 +254,69 @@ $currentOrder = $_GET['order'] ?? 'DESC';
         </div>
     </div>
 
+    <!-- Delete Popup -->
+    <div id="deleteModal"
+        class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+        <div class="bg-[#3A66A8] w-[500px] rounded-[20px] px-[35px] py-[25px] relative text-white">
+
+            <!-- Close -->
+            <button
+                onclick="closeDeleteModal()"
+                class="absolute top-[20px] right-[20px] text-[35px] leading-none">
+                &times;
+            </button>
+
+            <!-- Title -->
+            <div class="flex justify-center items-center gap-[10px]">
+
+                <h2 class="text-[28px] font-bold">
+                    Peringatan
+                </h2>
+
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-[30px]"></i>
+
+            </div>
+
+            <hr class="my-[15px] border-white">
+
+            <!-- Text -->
+            <div class="text-center">
+
+                <h3 class="text-[18px] font-bold mb-[10px]">
+                    Are you sure you want to delete this user?
+                </h3>
+
+                <p class="text-[14px] text-gray-200">
+                    Just making sure—this can't be undone.
+                </p>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center gap-[20px] mt-[30px]">
+
+                <a id="deleteLink"
+                    href="#"
+                    class="border-2 border-white px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-white hover:text-[#3A66A8] transition">
+
+                    Continue
+
+                </a>
+
+                <button
+                    onclick="closeDeleteModal()"
+                    class="bg-[#6C8DC1] px-[30px] py-[10px] rounded-[10px] text-[22px] font-semibold hover:bg-[#86A1CC] transition">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
 <script src="/js/admin/user/index.js"></script>
 

@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 require_once '../app/models/Event.php';
+require_once '../app/models/Registration.php';
 
 use App\Models\Event;
+use App\Models\Registration;
 
 class EventsController
-{   
+{
     public function index()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -49,4 +51,30 @@ class EventsController
 
         require_once '../app/views/event/event-detail.php';
     }
+
+public function register()
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['user'])) {
+        header("Location: /login");
+        exit;
+    }
+
+    $competition = $_GET['competition'] ?? '';
+    $eventId = $_GET['id'] ?? null;
+    $userId = $_SESSION['user']['id'] ?? null;
+
+    // CEK REGISTRASI USER
+    $registrationModel = new Registration();
+    $alreadyRegistered = null;
+
+    if ($userId && $competition) {
+        $alreadyRegistered = $registrationModel->checkRegistrationByUser($competition, $userId);
+    }
+
+    require_once '../app/views/event/register.php';
+}
 }

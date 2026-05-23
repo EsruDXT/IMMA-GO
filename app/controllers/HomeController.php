@@ -1,5 +1,10 @@
 <?php
+
 namespace App\Controllers;
+
+require_once '../app/models/Honor.php';
+
+use App\Models\Honor;
 
 class HomeController
 {
@@ -19,8 +24,11 @@ class HomeController
     {
         $this->checkAuth();
 
+        $honorModel = new Honor();
+
+        $honors = $honorModel->getAllHonors();
+
         require_once '../app/views/home.php';
     }
 }
-
 ?>
