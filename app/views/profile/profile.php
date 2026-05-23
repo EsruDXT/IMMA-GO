@@ -29,20 +29,27 @@
                 <h2 class="text-2xl font-bold text-gray-800"><?= htmlspecialchars($_SESSION['user']['name'] ?? '') ?></h2>
                 <p class="text-gray-500 font-medium mb-8"><?= strtoupper(htmlspecialchars($_SESSION['user']['role'] ?? '')); ?></p>
 
+                <!-- Menu -->
                 <div class="w-full space-y-3">
-                    <button class="w-full bg-[#a7bed3] text-gray-800 py-3 px-4 rounded-full flex items-center justify-center gap-3 font-semibold shadow-sm">
-                        <i class="fas fa-user-circle"></i> Personal Information
+
+                    <button onclick="window.location.href='/profile'"
+                        class="w-full bg-[#a7bed3] text-gray-800 py-3 px-4 rounded-full flex items-center justify-center gap-3 font-semibold shadow-sm">
+                        <i class="fas fa-user-circle"></i>
+                        Personal Information
                     </button>
-                    <button class="w-full text-gray-600 py-3 px-4 rounded-full flex items-center justify-center gap-3 font-medium hover:bg-gray-100 transition">
-                        <i class="fas fa-list-ul"></i> Student Activities
+
+                    <button onclick="window.location.href='/profile/student-activities'"
+                        class="w-full text-gray-600 py-3 px-4 rounded-full flex items-center justify-center gap-3 font-medium hover:bg-gray-100 transition">
+                        <i class="fas fa-list-ul"></i>
+                        Student Activities
                     </button>
-                    <a href="/logout"
+
+                    <button onclick="window.location.href='/logout'"
                         class="w-full text-gray-600 py-3 px-4 rounded-full flex items-center justify-center gap-3 font-medium hover:bg-red-50 hover:text-red-500 transition mt-10">
 
                         <i class="fas fa-sign-out-alt"></i>
                         Log Out
-
-                    </a>
+                    </button>
                 </div>
             </section>
 
