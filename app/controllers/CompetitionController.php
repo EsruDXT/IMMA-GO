@@ -12,177 +12,195 @@ class CompetitionController
 
     public function __construct()
     {
+        // SESSION HARUS SELALU START DI SINI (FIX UTAMA)
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $this->registrationModel = new Registration();
     }
 
     /*
     |--------------------------------------------------------------------------
-    | VIEW PAGE
+    | HELPER
+    |--------------------------------------------------------------------------
+    */
+
+    private function getUserId()
+{
+    return $_SESSION['user']['id'] ?? null;
+}
+
+    private function getRegistration($competition)
+    {
+        $userId = $this->getUserId();
+
+        if (!$userId) return null;
+
+        return $this->registrationModel->checkRegistrationByUser(
+            $competition,
+            $userId
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | VIEW PAGE (REGISTER PAGE)
     |--------------------------------------------------------------------------
     */
 
     public function anakAyam()
     {
         $competition = 'anak-ayam';
+        $alreadyRegistered = $this->getRegistration($competition);
 
-        require_once __DIR__ . '/../views/competition/register.php';
+        require __DIR__ . '/../views/event/register.php';
     }
 
     public function protectTheQueen()
     {
         $competition = 'protect-the-queen';
+        $alreadyRegistered = $this->getRegistration($competition);
 
-        require_once __DIR__ . '/../views/competition/register.php';
+        require __DIR__ . '/../views/event/register.php';
     }
 
     public function cupOfChaos()
     {
         $competition = 'cup-of-chaos';
+        $alreadyRegistered = $this->getRegistration($competition);
 
-        require_once __DIR__ . '/../views/competition/register.php';
+        require __DIR__ . '/../views/event/register.php';
     }
 
     /*
     |--------------------------------------------------------------------------
-    | CREATE
+    | STORE (REGISTER)
     |--------------------------------------------------------------------------
     */
 
     public function store()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        $userId = $this->getUserId();
+
+        if (!$userId) {
+            $_SESSION['error'] = "User belum login";
+            header("Location: /login");
+            exit;
         }
 
-        $competition = $_POST['competition'];
-        $classTarget = $_POST['class_target'];
-        $phoneNumber = $_POST['phone_number'];
+        $competition = isset($_POST['competition']) ? trim($_POST['competition']) : '';
+        $classTarget = isset($_POST['class_target']) ? trim($_POST['class_target']) : '';
+        $phoneNumber = isset($_POST['phone_number']) ? trim($_POST['phone_number']) : '';
+        $players = isset($_POST['players']) ? $_POST['players'] : [];
+        $eventId = isset($_POST['event_id']) ? trim($_POST['event_id']) : null;
 
-        // CEK SUDAH DAFTAR
+        // VALIDASI INPUT
+        if (empty($competition) || empty($classTarget) || empty($phoneNumber)) {
+            $_SESSION['error'] = "Semua field wajib diisi!";
+            header("Location: /competition/" . $competition);
+            exit;
+        }
+
+        if (empty($players)) {
+            $_SESSION['error'] = "Minimal harus ada satu member!";
+            header("Location: /competition/" . $competition);
+            exit;
+        }
+
+        // CEK SUDAH REGISTER
         $alreadyRegistered =
-            $this->registrationModel->checkRegistration(
+            $this->registrationModel->checkRegistrationByUser(
                 $competition,
-                $phoneNumber
+                $userId
             );
 
         if ($alreadyRegistered) {
-
-            $_SESSION['already_registered'] = true;
-
-            header("Location: " . $_SERVER['HTTP_REFERER']);
+            $_SESSION['error'] = "Anda sudah terdaftar di kompetisi ini!";
+            header("Location: /competition/" . $competition);
             exit;
         }
 
         // INSERT REGISTRATION
-        $registrationId =
-            $this->registrationModel->createRegistration(
-                $competition,
-                $classTarget,
-                $phoneNumber
-            );
-
-        // INSERT MEMBERS
-        foreach ($_POST['players'] as $player) {
-
-            if (!empty(trim($player))) {
-
-                $this->registrationModel->addMember(
-                    $registrationId,
-                    $player
+        try {
+            $registrationId =
+                $this->registrationModel->createRegistration(
+                    $competition,
+                    $classTarget,
+                    $phoneNumber,
+                    $userId
                 );
+
+            if (!$registrationId) {
+                $_SESSION['error'] = "Gagal menyimpan registrasi. Silakan coba lagi.";
+                header("Location: /competition/" . $competition);
+                exit;
             }
-        }
 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $_SESSION['register_success'] = true;
-
-        header("Location: " . $_SERVER['HTTP_REFERER']);
-        exit;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | READ
-    |--------------------------------------------------------------------------
-    */
-
-    public function index()
-    {
-        $registrations =
-            $this->registrationModel->getAll();
-
-        require_once
-            __DIR__ . '/../views/competition/index.php';
-    }
-
-    public function detail($id)
-    {
-        $registration =
-            $this->registrationModel->find($id);
-
-        $members =
-            $this->registrationModel->getMembers($id);
-
-        require_once
-            __DIR__ . '/../views/competition/detail.php';
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE
-    |--------------------------------------------------------------------------
-    */
-
-    public function update($id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            die('Method not allowed');
-        }
-
-        $competition = $_POST['competition'];
-        $classTarget = $_POST['class_target'];
-        $phoneNumber = $_POST['phone_number'];
-
-        $this->registrationModel->updateRegistration(
-            $id,
-            $competition,
-            $classTarget,
-            $phoneNumber
-        );
-
-        // delete old members
-        $this->registrationModel->deleteMembers($id);
-
-        // insert new members
-        foreach ($_POST['players'] as $player) {
-
-            if (!empty(trim($player))) {
-
-                $this->registrationModel->addMember(
-                    $id,
-                    $player
-                );
+            // INSERT MEMBERS
+            foreach ($players as $player) {
+                if (!empty(trim($player))) {
+                    $this->registrationModel->addMember(
+                        $registrationId,
+                        trim($player)
+                    );
+                }
             }
-        }
 
-        header("Location: /competition/detail/$id");
-        exit;
+            $_SESSION['success'] = "Registrasi berhasil!";
+            
+            // REDIRECT KE DETAIL REGISTRASI
+            $redirectUrl = "/competition/detail/" . $registrationId;
+            if ($eventId) {
+                $redirectUrl .= "?event_id=" . urlencode($eventId);
+            }
+            header("Location: " . $redirectUrl);
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['error'] = "Terjadi kesalahan: " . $e->getMessage();
+            header("Location: /competition/" . $competition);
+            exit;
+        }
     }
 
     /*
     |--------------------------------------------------------------------------
-    | DELETE
+    | DETAIL REGISTRATION
     |--------------------------------------------------------------------------
     */
 
-    public function delete($id)
+    public function detail($registrationId)
     {
-        $this->registrationModel->delete($id);
+        $userId = $this->getUserId();
 
-        header("Location: /competition");
-        exit;
+        if (!$userId) {
+            $_SESSION['error'] = "User belum login";
+            header("Location: /login");
+            exit;
+        }
+
+        // GET REGISTRATION DETAIL
+        $registration = $this->registrationModel->getRegistrationDetail($registrationId);
+
+        if (!$registration) {
+            $_SESSION['error'] = "Registrasi tidak ditemukan!";
+            header("Location: /home");
+            exit;
+        }
+
+        // CEK KEPEMILIKAN - HANYA PEMILIK YANG BISA LIHAT
+        if ($registration['user_id'] != $userId) {
+            $_SESSION['error'] = "Anda tidak berhak mengakses registrasi ini!";
+            header("Location: /home");
+            exit;
+        }
+
+        // GET MEMBERS
+        $members = $this->registrationModel->getRegistrationMembers($registrationId);
+
+        // GET EVENT ID FROM QUERY PARAMETER
+        $eventId = $_GET['event_id'] ?? null;
+
+        require __DIR__ . '/../views/event/registration-detail.php';
     }
 }

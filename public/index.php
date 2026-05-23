@@ -54,14 +54,18 @@ $router->add('POST', '/admin/users/update', 'Admin\UserController', 'update');
 
 $router->add('GET', '/admin/users/delete/{id}', 'Admin\UserController', 'delete');
 
+// Competition Routes
 $router->add('GET', '/competition/anak-ayam', 'CompetitionController','anakAyam');
 
 $router->add('GET', '/competition/protect-the-queen', 'CompetitionController', 'protectTheQueen');
 
 $router->add('GET', '/competition/cup-of-chaos', 'CompetitionController', 'cupOfChaos');
 
+// Registration Routes
 $router->add('GET', '/event/register', 'EventsController', 'register');
 
 $router->add('POST', '/competition/store', 'CompetitionController', 'store');
+
+$router->add('GET', '/competition/detail/{id}', 'CompetitionController', 'detail');
 
 $router->run();

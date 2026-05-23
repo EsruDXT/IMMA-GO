@@ -13,8 +13,30 @@ class Registration extends Database
     public function __construct()
     {
         parent::__construct();
-
         $this->conn = $this->connection;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECK USER REGISTRATION (CORE FIX)
+    |--------------------------------------------------------------------------
+    */
+
+    public function checkRegistrationByUser($competition, $userId)
+    {
+        $query = "
+            SELECT *
+            FROM registrations
+            WHERE competition = ?
+            AND user_id = ?
+            LIMIT 1
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("si", $competition, $userId);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
     }
 
     /*
@@ -26,25 +48,17 @@ class Registration extends Database
     public function createRegistration(
         $competition,
         $classTarget,
-        $phoneNumber
+        $phoneNumber,
+        $userId
     ) {
-
         $query = "
             INSERT INTO registrations
-            (competition, class_target, phone_number)
-
-            VALUES (?, ?, ?)
+            (competition, class_target, phone_number, user_id)
+            VALUES (?, ?, ?, ?)
         ";
 
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "sss",
-            $competition,
-            $classTarget,
-            $phoneNumber
-        );
-
+        $stmt->bind_param("sssi", $competition, $classTarget, $phoneNumber, $userId);
         $stmt->execute();
 
         return $this->conn->insert_id;
@@ -56,221 +70,54 @@ class Registration extends Database
     |--------------------------------------------------------------------------
     */
 
-    public function addMember(
-        $registrationId,
-        $playerName
-    ) {
-
+    public function addMember($registrationId, $playerName)
+    {
         $query = "
             INSERT INTO registration_members
             (registration_id, player_name)
-
             VALUES (?, ?)
         ";
 
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "is",
-            $registrationId,
-            $playerName
-        );
-
+        $stmt->bind_param("is", $registrationId, $playerName);
         $stmt->execute();
     }
 
     /*
     |--------------------------------------------------------------------------
-    | GET ALL
+    | GET REGISTRATION DETAIL WITH MEMBERS
     |--------------------------------------------------------------------------
     */
 
-    public function getAll()
-    {
-        $query = "
-            SELECT *
-            FROM registrations
-            ORDER BY created_at DESC
-        ";
-
-        $result = $this->conn->query($query);
-
-        $data = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-
-        return $data;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | FIND
-    |--------------------------------------------------------------------------
-    */
-
-    public function find($id)
+    public function getRegistrationDetail($registrationId)
     {
         $query = "
             SELECT *
             FROM registrations
             WHERE id = ?
+            LIMIT 1
         ";
 
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param("i", $id);
-
+        $stmt->bind_param("i", $registrationId);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        return $result->fetch_assoc();
+        return $stmt->get_result()->fetch_assoc();
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | GET MEMBERS
-    |--------------------------------------------------------------------------
-    */
-
-    public function getMembers($registrationId)
+    public function getRegistrationMembers($registrationId)
     {
         $query = "
             SELECT *
             FROM registration_members
             WHERE registration_id = ?
+            ORDER BY id ASC
         ";
 
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "i",
-            $registrationId
-        );
-
+        $stmt->bind_param("i", $registrationId);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        $data = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-
-        return $data;
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE
-    |--------------------------------------------------------------------------
-    */
-
-    public function updateRegistration(
-        $id,
-        $competition,
-        $classTarget,
-        $phoneNumber
-    ) {
-
-        $query = "
-            UPDATE registrations
-
-            SET
-                competition = ?,
-                class_target = ?,
-                phone_number = ?
-
-            WHERE id = ?
-        ";
-
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "sssi",
-            $competition,
-            $classTarget,
-            $phoneNumber,
-            $id
-        );
-
-        $stmt->execute();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | DELETE MEMBERS
-    |--------------------------------------------------------------------------
-    */
-
-    public function deleteMembers($registrationId)
-    {
-        $query = "
-            DELETE FROM registration_members
-            WHERE registration_id = ?
-        ";
-
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "i",
-            $registrationId
-        );
-
-        $stmt->execute();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | DELETE
-    |--------------------------------------------------------------------------
-    */
-
-    public function delete($id)
-    {
-        $query = "
-            DELETE FROM registrations
-            WHERE id = ?
-        ";
-
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bind_param(
-            "i",
-            $id
-        );
-
-        $stmt->execute();
-    }
-
-    public function checkRegistration(
-    $competition,
-    $phoneNumber
-) {
-
-    $query = "
-        SELECT id
-        FROM registrations
-        WHERE competition = ?
-        AND phone_number = ?
-    ";
-
-    $stmt = $this->conn->prepare($query);
-
-    $stmt->bind_param(
-        "ss",
-        $competition,
-        $phoneNumber
-    );
-
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    return $result->num_rows > 0;
-}
-    
 }
