@@ -19,11 +19,32 @@ This project provides features for managing events, honors/achievements, users, 
 
 # Tech Stack
 
-- PHP Native (MVC)
-- MySQL
-- TailwindCSS
-- JavaScript
-- Laragon
+<div align="center">
+
+<div style="display:flex; justify-content:center; gap:20px; margin-bottom:20px;">
+
+<img src="https://skillicons.dev/icons?i=php" width="60" />
+<img src="https://skillicons.dev/icons?i=mysql" width="60" />
+<img src="https://skillicons.dev/icons?i=tailwind" width="60" />
+
+</div>
+
+<div style="display:flex; justify-content:center; gap:20px;">
+
+<img src="https://skillicons.dev/icons?i=js" width="60" />
+
+<img src="https://cdn.simpleicons.org/laragon/0E83CD" width="60" height="60"/>
+
+</div>
+
+</div>
+
+---
+
+# Design App
+
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+
 
 ---
 
@@ -32,7 +53,7 @@ This project provides features for managing events, honors/achievements, users, 
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/imma-go.git
+git clone https://github.com/EsruDXT/imma-go.git
 ```
 
 ---
@@ -93,76 +114,76 @@ Password: admin123
 app/
 │
 ├── config/
-    │
-    ├── app.php
+│   │
+│   ├── app.php
 ├── controllers/
-    │
-    ├── admin/
-        │
-        ├── EventsController.php
-        ├── HonorController.php
-        ├── ManageController.php
-        ├── UserController.php
-    ├── AuthController.php
-    ├── CompetitionController.php
-    ├── EventsController.php
-    ├── HomeController.php
-    ├── ProfileController.php
+│   │
+│   ├── admin/
+│   │   │
+│   │   ├── EventsController.php
+│   │   ├── HonorController.php
+│   │   ├── ManageController.php
+│   │   ├── UserController.php
+│   ├── AuthController.php
+│   ├── CompetitionController.php
+│   ├── EventsController.php
+│   ├── HomeController.php
+│   ├── ProfileController.php
 ├── core/
-    │
-    ├── Controller.php
-    ├── Database.php
-    ├── Router.php
+│   │
+│   ├── Controller.php
+│   ├── Database.php
+│   ├── Router.php
 ├── models/
-    │
-    ├── Event.php
-    ├── Honor.php
-    ├── Manage.php
-    ├── Profile.php
-    ├── Registration.php
-    ├── StudentActivity.php
-    ├── User.php
+│   │
+│   ├── Event.php
+│   ├── Honor.php
+│   ├── Manage.php
+│   ├── Profile.php
+│   ├── Registration.php
+│   ├── StudentActivity.php
+│   ├── User.php
 ├── resources/
-    ├── css/
-        ├── input.php
+│   ├── css/
+│   │   ├── input.php
 ├── views/
-    ├── admin
-        ├── event/
-            ├── create.php
-            ├── edit.php
-            ├── index.php
-        ├── honors/
-            ├── create.php
-            ├── edit.php
-            ├── index.php
-        ├── user/
-            ├── create.php
-            ├── edit.php
-            ├── index.php
-        ├── manage.php
-    ├── auth
-        ├── login.php
-        ├── register.php
-    ├── event
-        ├── competition-detail.php
-        ├── event-detail.php
-        ├── events.php
-        ├── register.php
-        ├── registration-detail.php
-    ├── layouts
-        ├── partials/
-            ├── footer.
-            ├── heeader
-            ├── sidebar
-    ├── profile
-        ├── profile.php
-        ├── student-activities.php
-    ├── home.php
-│
+│   ├── admin
+│   │   ├── event/
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   ├── index.php
+│   │   ├── honors/
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   ├── index.php
+│   │   ├── user/
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   ├── index.php
+│   │   ├── manage.php
+│   ├── auth
+│   │   ├── login.php
+│   │   ├── register.php
+│   ├── event
+│   │   ├── competition-detail.php
+│   │   ├── event-detail.php
+│   │   ├── events.php
+│   │   ├── register.php
+│   │   ├── registration-detail.php
+│   ├── layouts
+│   │   ├── partials/
+│   │   │   ├── footer.
+│   │   │   ├── heeader
+│   │   │   ├── sidebar
+│   ├── profile
+│   │   ├── profile.php
+│   │   ├── student-activities.php
+│   ├── home.php
+│   
 public/
 │
 ├── assets/
-    ├── images
+│   ├── images
 ├── css/
 ├── js/
 ├── uploads/
@@ -203,7 +224,7 @@ public/
 - Responsive layout
 
 ## Admin Panel
-- CRUD management
+- CRUD management (Honors, Events, Users)
 - Modal confirmation
 - Image preview upload
 
