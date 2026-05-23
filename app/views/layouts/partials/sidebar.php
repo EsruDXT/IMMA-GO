@@ -17,10 +17,17 @@
             <i class="fa fa-medal text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
             <span class="text-sm mb-[25px]">Honors</span>
         </li>
-        <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/'">
-            <i class="fa fa-th-large text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
-            <span class="text-sm mb-[25px]">Overview</span>
-        </li>
+        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+
+            <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300"
+                onclick="window.location.href='/admin/manage'">
+
+                <i class="fa fa-th-large text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
+
+                <span class="text-sm mb-[25px]">Manage</span>
+            </li>
+
+        <?php endif; ?>
         <li class="group flex flex-col items-center my-[30px] cursor-pointer text-white/80 hover:text-white transition-colors duration-300" onclick="window.location.href='/profile'">
             <i class="fa fa-user text-[36px] mb-[6px] transition-transform duration-300 group-hover:-translate-y-2"></i>
             <span class="text-sm mb-[25px]">Profile</span>

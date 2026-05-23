@@ -69,4 +69,7 @@ $router->add('POST', '/competition/store', 'CompetitionController', 'store');
 
 $router->add('GET', '/competition/detail/{id}', 'CompetitionController', 'detail');
 
+// Management Routes
+$router->add('GET', '/admin/manage', 'Admin\ManageController', 'manageView');
+
 $router->run();

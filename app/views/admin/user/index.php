@@ -28,7 +28,7 @@
             <div class="flex items-center gap-5">
 
                 <button
-                    onclick="window.location.href='/home'"
+                    onclick="window.location.href='/admin/manage'"
                     class="bg-[#6489BF] text-white w-[40px] h-[40px] rounded">
 
                     <i class="fa-solid fa-chevron-left"></i>
