@@ -84,15 +84,17 @@ imma_go
 
 Start:
 
-- Apache
-- MySQL
+cd imma-go
+php -S localhost:3000 -t public
 
+Run Tailwind
+npm run dev (on the new tab)
 ---
 
 ## 5. Open Project
 
 ```bash
-http://localhost/imma-go/public/home
+http://localhost:3000/login
 ```
 
 ---
@@ -103,7 +105,13 @@ http://localhost/imma-go/public/home
 
 ```bash
 Email: marvin@ski.sch.id
-Password: admin123
+Password: Admin123
+```
+
+## User
+```bash
+Email: forensyahani@ski.sch.id
+Password: Student1
 ```
 
 ---
